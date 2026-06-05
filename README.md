@@ -24,11 +24,9 @@ Single-page website for Brie Cakes, a local custom cake business owned by Polite
 
 The site still keeps unfinished business content as bracketed placeholders:
 
-- Pricing amounts
 - Facebook page or profile URL
 - Professional photograph of Polite Ndoro
 - Real gallery photos
-- Polite's final personal bio details
 
 ## How To Run
 

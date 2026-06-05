@@ -11,12 +11,7 @@ Use this checklist to collect the final customer details before publishing the s
 
 ## Pricing
 
-- Small cakes starting price
-- Medium cakes starting price
-- Large custom cakes starting price
-- Cupcakes starting price per dozen
-- Dessert treats starting price
-- Wedding and event cake quote note, if the current wording should change
+The site now explains that each cake is quoted after the design brief. Add starting prices only if Polite wants public pricing on the website.
 
 ## About Polite
 
