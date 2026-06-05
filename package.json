@@ -1,0 +1,15 @@
+{
+  "name": "brie-cakes-static-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static single-page website for Brie Cakes.",
+  "type": "module",
+  "scripts": {
+    "test": "node tests/site-checks.mjs",
+    "check": "node tests/site-checks.mjs",
+    "serve": "node scripts/serve.mjs",
+    "check:launch": "node scripts/launch-readiness.mjs",
+    "sync:csp": "node scripts/sync-csp-hash.mjs"
+  },
+  "license": "UNLICENSED"
+}

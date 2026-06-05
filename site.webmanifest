@@ -1,0 +1,17 @@
+{
+  "name": "Brie Cakes",
+  "short_name": "Brie Cakes",
+  "description": "Custom birthday cakes and celebration treats by Polite Ndoro.",
+  "start_url": "./index.html",
+  "display": "minimal-ui",
+  "background_color": "#FAF7F5",
+  "theme_color": "#E8BCC1",
+  "icons": [
+    {
+      "src": "assets/brie-events-logo-and-favicon.jpg",
+      "sizes": "1200x1200",
+      "type": "image/jpeg",
+      "purpose": "any"
+    }
+  ]
+}
