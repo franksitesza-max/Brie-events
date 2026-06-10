@@ -202,7 +202,7 @@ p {
 }
 
 .hero {
-  padding-block: clamp(2rem, 5vw, 4rem);
+  padding-block: clamp(1.1rem, 2.8vw, 2rem) clamp(2rem, 5vw, 4rem);
   background:
     linear-gradient(135deg, rgba(255, 248, 244, 0.96), rgba(232, 188, 193, 0.28)),
     var(--color-warm-white);
@@ -226,38 +226,43 @@ p {
 }
 
 .hero-copy {
+  display: grid;
+  grid-template-areas:
+    "text logo"
+    "actions logo";
+  grid-template-columns: minmax(0, 1fr) clamp(13rem, 28vw, 22rem);
+  align-items: center;
+  column-gap: clamp(1rem, 4vw, 3.25rem);
+  row-gap: 1.25rem;
   max-width: 74rem;
   margin-inline: auto;
-  padding-block: clamp(0.75rem, 2vw, 1.5rem);
+  padding-block: 0;
   text-align: left;
 }
 
-.hero-copy::after {
-  content: "";
-  display: block;
-  clear: both;
+.hero-text {
+  grid-area: text;
+  min-width: 0;
 }
 
-.hero-copy h1 {
+.hero-text h1 {
   max-width: 12ch;
   margin-inline: 0;
 }
 
 .hero-logo {
-  float: right;
+  grid-area: logo;
   display: grid;
-  width: clamp(12.5rem, 27vw, 21rem);
+  width: min(100%, 22rem);
   aspect-ratio: 1;
+  justify-self: center;
   place-items: center;
   overflow: hidden;
   border: 1px solid var(--color-border);
   border-radius: 50%;
   background: var(--color-white);
   box-shadow: var(--shadow-soft);
-  margin: clamp(1.05rem, 2.2vw, 2rem) 0 1.25rem clamp(1.25rem, 4vw, 3rem);
   padding: 0.55rem;
-  shape-outside: circle(50%);
-  shape-margin: clamp(0.8rem, 2vw, 1.35rem);
 }
 
 .hero-logo img {
@@ -293,7 +298,7 @@ p {
 }
 
 .hero .button-row {
-  clear: both;
+  grid-area: actions;
   justify-content: flex-start;
 }
 
@@ -392,6 +397,10 @@ p {
   max-width: 32rem;
   margin-inline: auto;
   padding: 1rem;
+}
+
+.pricing-layout {
+  align-items: start;
 }
 
 .price-item {
@@ -1035,30 +1044,47 @@ p {
     max-width: 14ch;
   }
 
-  .hero-logo {
-    width: min(42vw, 9rem);
-    margin: 0.85rem 2.25rem 0.85rem 1rem;
-    padding: 0.3rem;
-    shape-margin: 0.75rem;
-  }
-
   .hero-copy {
+    grid-template-areas:
+      "text"
+      "logo"
+      "actions";
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+    row-gap: 0.75rem;
     width: 100%;
     max-width: none;
     padding-block: 0;
+    text-align: center;
   }
 
-  .hero-copy .eyebrow {
+  .hero {
+    padding-block: 1rem 2rem;
+  }
+
+  .hero-logo {
+    width: min(42vw, 9.5rem);
+    padding: 0.28rem;
+  }
+
+  .hero-text {
+    display: grid;
+    justify-items: center;
+  }
+
+  .hero-text .eyebrow {
     font-size: 0.68rem;
   }
 
-  .hero-copy h1 {
-    max-width: 10.5ch;
-    font-size: clamp(1.9rem, 8vw, 2.55rem);
+  .hero-text h1 {
+    max-width: 11ch;
+    margin-inline: auto;
+    font-size: clamp(1.9rem, 7.6vw, 2.5rem);
   }
 
   .lead {
-    max-width: 34ch;
+    max-width: 36ch;
+    margin-inline: auto;
   }
 
   .intro p {
