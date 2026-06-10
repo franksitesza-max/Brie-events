@@ -13,6 +13,7 @@
   --radius: 8px;
   --container: 1120px;
   --section-y: clamp(3rem, 7vw, 5rem);
+  --anchor-offset: 4.7rem;
 }
 
 * {
@@ -21,6 +22,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: var(--anchor-offset);
 }
 
 html,
@@ -114,7 +116,7 @@ p {
 
 .section {
   padding-block: var(--section-y);
-  scroll-margin-top: 8rem;
+  scroll-margin-top: var(--anchor-offset);
 }
 
 .section-tint {
@@ -263,6 +265,7 @@ p {
   background: var(--color-white);
   box-shadow: var(--shadow-soft);
   padding: 0.55rem;
+  transform: translateY(clamp(-1.65rem, -2vw, -0.85rem));
 }
 
 .hero-logo img {
@@ -299,7 +302,17 @@ p {
 
 .hero .button-row {
   grid-area: actions;
+  align-items: stretch;
   justify-content: flex-start;
+  max-width: 42rem;
+}
+
+.hero .button {
+  flex: 1 1 0;
+  min-width: min(100%, 16rem);
+  min-height: 5.1rem;
+  padding: 1.2rem 1.65rem;
+  font-size: 1.18rem;
 }
 
 .button {
@@ -1009,6 +1022,10 @@ p {
 }
 
 @media (max-width: 680px) {
+  :root {
+    --anchor-offset: 7.4rem;
+  }
+
   .container {
     width: calc(100% - 1.25rem);
     max-width: calc(100% - 1.25rem);
@@ -1071,6 +1088,7 @@ p {
   .hero-logo {
     width: min(42vw, 9.5rem);
     padding: 0.28rem;
+    transform: none;
   }
 
   .hero-text {
@@ -1104,6 +1122,13 @@ p {
 
   .hero .button-row {
     justify-content: center;
+    max-width: none;
+  }
+
+  .hero .button {
+    min-width: 100%;
+    min-height: 5rem;
+    font-size: 1.14rem;
   }
 
   .about-copy {
