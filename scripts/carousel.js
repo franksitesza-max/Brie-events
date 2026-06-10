@@ -1,3 +1,13 @@
+if ("scrollRestoration" in history) {
+  history.scrollRestoration = "manual";
+}
+
+window.addEventListener("pageshow", () => {
+  if (!window.location.hash) {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }
+});
+
 const carousel = document.querySelector("[data-carousel]");
 const prevButton = document.querySelector("[data-carousel-prev]");
 const nextButton = document.querySelector("[data-carousel-next]");
