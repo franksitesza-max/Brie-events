@@ -1,0 +1,31 @@
+# Brie Cakes
+
+> Custom cakes, birthday cakes, wedding cakes, baby shower cakes, and event cakes by Brie Cakes, serving Somerset West, Stellenbosch, and Cape Town.
+
+Canonical site: https://brieevents.co.za/
+Brand: Brie Cakes
+Owner and baker: Polite Ndoro
+Primary service area: Somerset West, Western Cape, South Africa
+Additional service areas: Stellenbosch and Cape Town
+Contact: WhatsApp or call +27 68 553 3304
+Email: politendoro@gmail.com
+
+## Services
+
+- Custom birthday cakes
+- Kids birthday cakes and themed birthday cakes
+- Personalised and bespoke cake designs
+- Wedding cakes and event cakes
+- Baby shower cakes, bridal shower cakes, engagement cakes, graduation cakes, and anniversary cakes
+- Cupcakes, bento cakes, sweet treats, and savoury party platters
+
+## Ordering Notes
+
+Standard items usually need at least 1 week notice. Custom cakes are best requested at least 2 weeks ahead. Pricing depends on size, flavor, theme, design detail, decorations, timing, collection, and delivery needs.
+
+## Crawler Policy
+
+Search engine crawlers and AI answer-engine crawlers are welcome to crawl and cite the public site. The canonical homepage and sitemap should be used as the source of truth:
+
+- https://brieevents.co.za/
+- https://brieevents.co.za/sitemap.xml

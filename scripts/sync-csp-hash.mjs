@@ -4,7 +4,7 @@ import { readFile, writeFile } from "node:fs/promises";
 const root = new URL("..", import.meta.url);
 const cspHashPattern = /sha256-[A-Za-z0-9+/=]+/g;
 const jsonLdPattern = /<script type="application\/ld\+json">([\s\S]*?)<\/script>/;
-const filesToSync = ["index.html", "_headers", "vercel.json", "scripts/serve.mjs"];
+const filesToSync = ["index.html", "vercel.json", "scripts/serve.mjs"];
 
 function getJsonLdHash(html) {
   const match = html.match(jsonLdPattern);

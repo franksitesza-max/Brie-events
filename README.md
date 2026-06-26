@@ -16,7 +16,6 @@ Single-page website for Brie Cakes, a local custom cake business owned by Polite
 - `package.json` - repeatable validation scripts
 - `robots.txt` - crawl rule for static hosting
 - `site.webmanifest` - browser install and theme metadata
-- `_headers` - host-level security headers for Netlify and Cloudflare-style static hosting
 - `vercel.json` - Vercel security headers and clean URL configuration
 - `PROJECT_BRIEF.md` - customer strategy and design brief
 
@@ -82,6 +81,6 @@ cmd.exe /c npm.cmd run sync:csp
 
 Upload the full folder to any static host. Keep `index.html`, `404.html`, `styles.css`, `robots.txt`, `site.webmanifest`, `assets/`, and the favicon image path together.
 
-If the host supports `_headers` or `vercel.json`, keep those files at the project root so the security headers deploy with the site.
+Keep `vercel.json` at the project root so the security headers deploy with the site.
 
 Before launch, work through `CONTENT_CHECKLIST.md`, replace bracketed placeholders with real business information, add the Facebook link, and add actual Brie Cakes photography. Use optimized image formats where possible, and keep original filenames descriptive.

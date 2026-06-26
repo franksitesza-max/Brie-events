@@ -6,7 +6,8 @@ const notFoundHtml = await readFile(new URL("../404.html", import.meta.url), "ut
 const css = await readFile(new URL("../styles.css", import.meta.url), "utf8");
 const packageJson = JSON.parse(await readFile(new URL("../package.json", import.meta.url), "utf8"));
 const robots = await readFile(new URL("../robots.txt", import.meta.url), "utf8");
-const hostHeaders = await readFile(new URL("../_headers", import.meta.url), "utf8");
+const sitemap = await readFile(new URL("../sitemap.xml", import.meta.url), "utf8");
+const llms = await readFile(new URL("../llms.txt", import.meta.url), "utf8");
 const manifest = JSON.parse(await readFile(new URL("../site.webmanifest", import.meta.url), "utf8"));
 const vercelConfig = JSON.parse(await readFile(new URL("../vercel.json", import.meta.url), "utf8"));
 const previewServer = await readFile(new URL("../scripts/serve.mjs", import.meta.url), "utf8");
@@ -39,6 +40,14 @@ const requiredSecurityHeaders = [
 ];
 
 assert(html.includes('name="viewport"'), "Missing viewport meta tag.");
+assert(html.includes('name="robots" content="index, follow, max-image-preview:large'), "Missing crawler-friendly robots meta tag.");
+assert(html.includes('rel="canonical" href="https://brieevents.co.za/"'), "Missing canonical domain link.");
+assert(html.includes('href="https://brieevents.co.za/llms.txt"'), "Missing AI-readable llms.txt discovery link.");
+assert(html.includes('property="og:url" content="https://brieevents.co.za/"'), "Missing Open Graph URL.");
+assert(html.includes("Custom Cakes Somerset West"), "Missing primary local title phrase.");
+assert(html.includes("Somerset West"), "Missing Somerset West local signal.");
+assert(html.includes("Stellenbosch"), "Missing Stellenbosch local signal.");
+assert(html.includes("Cape Town"), "Missing Cape Town local signal.");
 assert(html.includes("Content-Security-Policy"), "Missing Content Security Policy meta tag.");
 assert(html.includes("frame-ancestors 'none'"), "CSP must block framing.");
 const jsonLdMatch = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
@@ -46,6 +55,15 @@ assert(Boolean(jsonLdMatch), "Missing JSON-LD structured data.");
 if (jsonLdMatch) {
   const jsonLdHash = `sha256-${createHash("sha256").update(jsonLdMatch[1]).digest("base64")}`;
   assert(html.includes(jsonLdHash), "CSP hash must match the inline JSON-LD.");
+  const structuredData = JSON.parse(jsonLdMatch[1]);
+  const graphTypes = new Set(structuredData["@graph"]?.map((item) => item["@type"]));
+  assert(graphTypes.has("Bakery"), "JSON-LD missing Bakery entity.");
+  assert(graphTypes.has("WebSite"), "JSON-LD missing WebSite entity.");
+  assert(graphTypes.has("WebPage"), "JSON-LD missing WebPage entity.");
+  assert(graphTypes.has("BreadcrumbList"), "JSON-LD missing BreadcrumbList entity.");
+  assert(JSON.stringify(structuredData).includes("https://brieevents.co.za/"), "JSON-LD missing canonical domain.");
+  assert(JSON.stringify(structuredData).includes("areaServed"), "JSON-LD missing local service areas.");
+  assert(JSON.stringify(structuredData).includes("PostalAddress"), "JSON-LD missing public local address fields.");
 }
 assert(html.includes("Brie Cakes"), "Missing customer brand name.");
 assert(html.includes("Polite Ndoro"), "Missing owner name.");
@@ -76,12 +94,14 @@ assert(packageJson.scripts?.["sync:csp"] === "node scripts/sync-csp-hash.mjs", "
 assert(packageJson.private === true, "package.json should be private.");
 assert(robots.includes("User-agent: *"), "robots.txt missing user agent rule.");
 assert(robots.includes("Allow: /"), "robots.txt should allow crawling.");
-
-for (const header of requiredSecurityHeaders) {
-  assert(hostHeaders.includes(header), `_headers missing ${header}.`);
+assert(robots.includes("Sitemap: https://brieevents.co.za/sitemap.xml"), "robots.txt should reference the sitemap.");
+for (const crawler of ["Googlebot", "Google-InspectionTool", "Bingbot", "OAI-SearchBot", "GPTBot", "ChatGPT-User", "ClaudeBot", "Claude-SearchBot", "Claude-User", "PerplexityBot", "Perplexity-User", "Google-Extended"]) {
+  assert(robots.includes(`User-agent: ${crawler}`), `robots.txt should explicitly welcome ${crawler}.`);
 }
-assert(hostHeaders.includes("nosniff"), "_headers should set nosniff.");
-assert(hostHeaders.includes("camera=(), microphone=()"), "_headers should disable sensitive browser permissions.");
+assert(sitemap.includes("<loc>https://brieevents.co.za/</loc>"), "sitemap.xml should include the canonical homepage.");
+assert(llms.includes("Canonical site: https://brieevents.co.za/"), "llms.txt should include the canonical site.");
+assert(llms.includes("Somerset West"), "llms.txt should include the primary local service area.");
+assert(llms.includes("Crawler Policy"), "llms.txt should explain crawler policy.");
 
 const vercelHeaders = vercelConfig.headers?.[0]?.headers ?? [];
 const vercelHeaderNames = new Set(vercelHeaders.map((header) => header.key));
@@ -94,12 +114,17 @@ if (vercelCsp && jsonLdMatch) {
   const jsonLdHash = `sha256-${createHash("sha256").update(jsonLdMatch[1]).digest("base64")}`;
   assert(html.includes(jsonLdHash), "index.html CSP hash must match inline JSON-LD.");
   assert(vercelCsp.includes(jsonLdHash), "vercel.json CSP hash must match inline JSON-LD.");
-  assert(hostHeaders.includes(jsonLdHash), "_headers CSP hash must match inline JSON-LD.");
   assert(previewServer.includes(jsonLdHash), "Preview server CSP hash must match inline JSON-LD.");
 }
 assert(vercelConfig.cleanUrls === true, "vercel.json should enable clean URLs.");
+const canonicalRedirect = vercelConfig.redirects?.find((redirect) => redirect.destination === "https://brieevents.co.za/:path*");
+assert(Boolean(canonicalRedirect), "vercel.json should redirect www to the canonical apex domain.");
+
 
 assert(manifest.name === "Brie Cakes", "Manifest name is incorrect.");
+assert(manifest.id === "https://brieevents.co.za/", "Manifest id should use the canonical production domain.");
+assert(manifest.start_url === "/", "Manifest should start at the canonical homepage.");
+assert(manifest.scope === "/", "Manifest should scope to the production root.");
 assert(manifest.theme_color === "#E8BCC1", "Manifest theme color should match the brand palette.");
 assert(Array.isArray(manifest.icons) && manifest.icons.length > 0, "Manifest needs at least one icon.");
 

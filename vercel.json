@@ -5,7 +5,7 @@
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self' 'sha256-qi1hdlxyBgmfpUnnJSzClV1dXTbX0j5lf6VfR7i16p4='; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests"
+          "value": "default-src 'self'; img-src 'self' data:; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'sha256-philOtFwU9evUtVrGD/WszwKgzmFY1Z34dEJeNggDNY='; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests"
         },
         {
           "key": "X-Content-Type-Options",
@@ -28,6 +28,19 @@
           "value": "max-age=31536000; includeSubDomains"
         }
       ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.brieevents.co.za"
+        }
+      ],
+      "destination": "https://brieevents.co.za/:path*",
+      "permanent": true
     }
   ],
   "cleanUrls": true

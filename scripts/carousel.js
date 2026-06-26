@@ -1,3 +1,35 @@
+const loadingRoot = document.documentElement;
+const loadingStartedAt = performance.now();
+let componentsMarkedReady = false;
+
+function markComponentsReady() {
+  if (componentsMarkedReady) return;
+  componentsMarkedReady = true;
+  const elapsed = performance.now() - loadingStartedAt;
+  const remainingDelay = Math.max(0, 240 - elapsed);
+  window.setTimeout(() => {
+    requestAnimationFrame(() => {
+      loadingRoot.classList.remove("is-loading");
+      loadingRoot.classList.add("components-ready");
+    });
+  }, remainingDelay);
+}
+
+function waitForEagerImages() {
+  const eagerImages = [...document.images].filter((image) => image.loading !== "lazy");
+  return Promise.all(eagerImages.map((image) => {
+    if (image.complete) return Promise.resolve();
+    return new Promise((resolve) => {
+      image.addEventListener("load", resolve, { once: true });
+      image.addEventListener("error", resolve, { once: true });
+    });
+  }));
+}
+
+const fontsReady = document.fonts ? document.fonts.ready.catch(() => undefined) : Promise.resolve();
+Promise.all([fontsReady, waitForEagerImages()]).then(markComponentsReady);
+window.addEventListener("load", markComponentsReady, { once: true });
+window.setTimeout(markComponentsReady, 1600);
 if ("scrollRestoration" in history) {
   history.scrollRestoration = "manual";
 }
@@ -13,70 +45,32 @@ const prevButton = document.querySelector("[data-carousel-prev]");
 const nextButton = document.querySelector("[data-carousel-next]");
 
 if (carousel && prevButton && nextButton) {
-  const originalItems = [...carousel.querySelectorAll(".gallery-item")];
-  const itemCount = originalItems.length;
+  const items = [...carousel.querySelectorAll(".gallery-item")];
+  const itemCount = items.length;
   const initialIndex = itemCount > 1 ? 1 : 0;
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  let items = originalItems;
   let activeIndex = initialIndex;
   let rafId = 0;
-  let normalizeTimer = 0;
-
-  if (itemCount > 1) {
-    const leadingClones = originalItems.map((item) => item.cloneNode(true));
-    const trailingClones = originalItems.map((item) => item.cloneNode(true));
-
-    [...leadingClones, ...trailingClones].forEach((item) => {
-      item.removeAttribute("id");
-      item.removeAttribute("aria-current");
-      item.setAttribute("aria-hidden", "true");
-      item.classList.remove("is-active");
-    });
-
-    carousel.prepend(...leadingClones);
-    carousel.append(...trailingClones);
-    items = [...carousel.querySelectorAll(".gallery-item")];
-    activeIndex = itemCount + initialIndex;
-  }
 
   function setActive(index) {
-    activeIndex = (index + items.length) % items.length;
+    if (!itemCount) return;
+    activeIndex = (index + itemCount) % itemCount;
     items.forEach((item, itemIndex) => {
       const isActive = itemIndex === activeIndex;
       item.classList.toggle("is-active", isActive);
-      if (item.hasAttribute("aria-hidden")) return;
       item.setAttribute("aria-current", isActive ? "true" : "false");
     });
   }
 
   function scrollToItem(index, behavior) {
-    items[index].scrollIntoView({
-      behavior,
-      block: "nearest",
-      inline: "center"
-    });
-  }
-
-  function normalizePosition() {
-    if (itemCount <= 1) return;
-
-    let normalizedIndex = activeIndex;
-    if (activeIndex < itemCount) {
-      normalizedIndex = activeIndex + itemCount;
+    const item = items[index];
+    if (!item) return;
+    const targetScrollLeft = item.offsetLeft - (carousel.clientWidth - item.clientWidth) / 2;
+    if (behavior === "smooth") {
+      carousel.scrollTo({ left: targetScrollLeft, behavior: "smooth" });
+    } else {
+      carousel.scrollLeft = targetScrollLeft;
     }
-    if (activeIndex >= itemCount * 2) {
-      normalizedIndex = activeIndex - itemCount;
-    }
-
-    if (normalizedIndex !== activeIndex) {
-      setActive(normalizedIndex);
-      scrollToItem(normalizedIndex, "auto");
-    }
-  }
-
-  function queueNormalize() {
-    window.clearTimeout(normalizeTimer);
-    normalizeTimer = window.setTimeout(normalizePosition, 140);
   }
 
   function nearestIndex() {
@@ -95,7 +89,6 @@ if (carousel && prevButton && nextButton) {
   function updateFromScroll() {
     rafId = 0;
     setActive(nearestIndex());
-    queueNormalize();
   }
 
   function queueUpdate() {
@@ -103,10 +96,9 @@ if (carousel && prevButton && nextButton) {
   }
 
   function move(direction) {
-    const targetIndex = (activeIndex + direction + items.length) % items.length;
+    const targetIndex = (activeIndex + direction + itemCount) % itemCount;
     setActive(targetIndex);
     scrollToItem(targetIndex, prefersReducedMotion.matches ? "auto" : "smooth");
-    queueNormalize();
   }
 
   prevButton.addEventListener("click", () => move(-1));
