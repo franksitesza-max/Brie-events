@@ -335,6 +335,7 @@ html.is-loading .site-header {
 .hero-title-area h1 {
   max-width: 12ch;
   margin-inline: auto;
+  font-size: clamp(2.025rem, 5.22vw, 4.275rem);
 }
 
 .hero-copy .lead {
@@ -459,10 +460,6 @@ html.is-loading .site-header {
 }
 
 .service-ribbon {
-  display: grid;
-  grid-template-columns: 2.35rem minmax(0, 1fr) 2.35rem;
-  align-items: center;
-  gap: 0.55rem;
   width: min(100%, 54rem);
   margin-inline: auto;
   overflow: hidden;
@@ -476,33 +473,7 @@ html.is-loading .site-header {
   mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
 }
 
-
-.service-ribbon-pin {
-  display: block;
-  width: 2.05rem;
-  height: 2.05rem;
-  justify-self: center;
-  background: #c75f78;
-  -webkit-mask: url("assets/pointer-pin.svg") center / contain no-repeat;
-  mask: url("assets/pointer-pin.svg") center / contain no-repeat;
-  filter: drop-shadow(0 4px 5px rgba(187, 62, 94, 0.18));
-  animation: ribbon-pin-bounce 1.9s ease-in-out infinite;
-}
-
-.service-ribbon-pin-right {
-  animation-delay: 0.28s;
-}
-
-@keyframes ribbon-pin-bounce {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-0.22rem);
-  }
-}.service-ribbon-track {
+.service-ribbon-track {
   display: flex;
   width: max-content;
   align-items: center;
@@ -1266,7 +1237,7 @@ html.is-loading .site-header {
     width: 100%;
     align-self: start;
     justify-self: center;
-    margin-top: 1.85rem;
+    margin-top: 2.35rem;
     padding: 0.28rem;
     transform: none;
   }
@@ -1383,10 +1354,6 @@ html.is-loading .site-header {
 
   .service-ribbon-track {
     transform: none;
-    animation: none;
-  }
-
-  .service-ribbon-pin {
     animation: none;
   }
 

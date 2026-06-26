@@ -23,7 +23,7 @@ const mimeTypes = new Map([
 
 const securityHeaders = {
   "Content-Security-Policy":
-    "default-src 'self'; img-src 'self' data:; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'sha256-philOtFwU9evUtVrGD/WszwKgzmFY1Z34dEJeNggDNY='; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests",
+    "default-src 'self' https://brieevents.co.za https://www.brieevents.co.za https://*.vercel.app; img-src 'self' data: https://brieevents.co.za https://www.brieevents.co.za https://*.vercel.app; style-src 'self' https://brieevents.co.za https://www.brieevents.co.za https://*.vercel.app https://fonts.googleapis.com; font-src 'self' https://brieevents.co.za https://www.brieevents.co.za https://*.vercel.app https://fonts.gstatic.com; script-src 'self' https://brieevents.co.za https://www.brieevents.co.za https://*.vercel.app 'sha256-philOtFwU9evUtVrGD/WszwKgzmFY1Z34dEJeNggDNY='; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests",
   "X-Content-Type-Options": "nosniff",
   "X-Frame-Options": "DENY",
   "Referrer-Policy": "strict-origin-when-cross-origin",
