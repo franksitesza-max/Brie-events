@@ -81,7 +81,7 @@ for (const asset of [
   assert.ok(bytes.length > 40_000, `${asset} appears incomplete.`);
 }
 assert.ok(index.includes('href="#cakes-title"'));
-assert.ok(index.includes('href="#pricing-title"'));
+assert.ok(index.includes('href="#pricing-content"'));
 assert.ok(index.includes('href="#gallery-title"'));
 assert.ok(index.includes('href="#contact-title"'));
 assert.doesNotMatch(index, /hero-stamp|Made to order/, "Removed hero badge must stay removed.");
