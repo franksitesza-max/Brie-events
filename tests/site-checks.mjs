@@ -49,7 +49,7 @@ assert(html.includes("Somerset West"), "Missing Somerset West local signal.");
 assert(html.includes("Stellenbosch"), "Missing Stellenbosch local signal.");
 assert(html.includes("Cape Town"), "Missing Cape Town local signal.");
 assert(html.includes("Content-Security-Policy"), "Missing Content Security Policy meta tag.");
-assert(html.includes("frame-ancestors 'none'"), "CSP must block framing.");
+
 const jsonLdMatch = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
 assert(Boolean(jsonLdMatch), "Missing JSON-LD structured data.");
 if (jsonLdMatch) {
@@ -110,6 +110,7 @@ for (const header of requiredSecurityHeaders) {
 }
 const vercelCsp = vercelHeaders.find((header) => header.key === "Content-Security-Policy")?.value;
 assert(Boolean(vercelCsp), "vercel.json missing CSP value.");
+assert(vercelCsp?.includes("frame-ancestors 'none'"), "Vercel CSP header must block framing.");
 if (vercelCsp && jsonLdMatch) {
   const jsonLdHash = `sha256-${createHash("sha256").update(jsonLdMatch[1]).digest("base64")}`;
   assert(html.includes(jsonLdHash), "index.html CSP hash must match inline JSON-LD.");
