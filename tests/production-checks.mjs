@@ -19,6 +19,7 @@ const index = htmlFiles.get("index.html");
 const notFound = htmlFiles.get("404.html");
 const css = await read("styles.css");
 const robots = await read("robots.txt");
+const loadingScript = await read("scripts/loading.js");
 const robotsAi = await read("robots-ai.txt");
 const llms = await read("llms.txt");
 const aiText = await read("ai.txt");
@@ -59,6 +60,26 @@ assert.ok(css.includes("@keyframes nav-particle"));
 assert.ok(css.includes("@keyframes service-ribbon-scroll"));
 assert.ok(css.includes("scroll-snap-type: inline mandatory"));
 assert.match(css, /scroll-behavior:\s*smooth/, "CSS smooth scrolling must remain enabled.");
+assert.ok(index.includes("assets/featured/brie-butterfly-cake-hero.webp"));
+assert.ok(index.includes("assets/gallery/briecakesproductimg-15-cocomelon-first-birthday-cake-real.webp"));
+assert.ok(index.includes("AI-enhanced presentation"));
+const kidsPage = htmlFiles.get("kids-themed-cakes-somerset-west.html");
+assert.ok(kidsPage.includes("assets/featured/brie-cocomelon-cake-ai-upscale.webp"));
+assert.ok(kidsPage.includes("based on Polite's real Cocomelon cake"));
+assert.ok(css.includes(".skeleton-media"));
+assert.ok(css.includes(".skeleton-media.media-ready"));
+assert.ok(loadingScript.includes("prepareImageSkeleton"));
+for (const [name, html] of htmlFiles) {
+  assert.ok(html.includes("scripts/loading.js"), `${name} must load the shared skeleton controller.`);
+}
+for (const asset of [
+  "assets/featured/brie-butterfly-cake-hero.webp",
+  "assets/featured/brie-cocomelon-cake-ai-upscale.webp",
+  "assets/gallery/briecakesproductimg-15-cocomelon-first-birthday-cake-real.webp"
+]) {
+  const bytes = await readFile(new URL(asset, root));
+  assert.ok(bytes.length > 40_000, `${asset} appears incomplete.`);
+}
 assert.ok(index.includes('href="#cakes-title"'));
 assert.ok(index.includes('href="#pricing-title"'));
 assert.ok(index.includes('href="#gallery-title"'));

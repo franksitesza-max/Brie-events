@@ -21,6 +21,8 @@ Canonical identity:
 - `privacy.html` and `terms.html`: POPIA-aligned privacy notice and formal customer terms
 - `404.html`: noindex fallback served with a real HTTP 404
 - `styles.css`: responsive design system and accessible interaction states
+- `scripts/loading.js`: shared page and image skeleton readiness controller used by every HTML route
+- `assets/featured/`: approved presentation imagery used in hero and guide-page compositions
 - `scripts/gooey-nav.js`: dependency-free active navigation effect adapted from the supplied React Bits concept
 - `scripts/carousel.js`: swipe, button, scroll, and keyboard cake-carousel behavior
 - `site-facts.json`: public business facts

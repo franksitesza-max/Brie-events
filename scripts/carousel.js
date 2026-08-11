@@ -1,35 +1,3 @@
-const loadingRoot = document.documentElement;
-const loadingStartedAt = performance.now();
-let componentsMarkedReady = false;
-
-function markComponentsReady() {
-  if (componentsMarkedReady) return;
-  componentsMarkedReady = true;
-  const elapsed = performance.now() - loadingStartedAt;
-  const remainingDelay = Math.max(0, 240 - elapsed);
-  window.setTimeout(() => {
-    requestAnimationFrame(() => {
-      loadingRoot.classList.remove("is-loading");
-      loadingRoot.classList.add("components-ready");
-    });
-  }, remainingDelay);
-}
-
-function waitForEagerImages() {
-  const eagerImages = [...document.images].filter((image) => image.loading !== "lazy");
-  return Promise.all(eagerImages.map((image) => {
-    if (image.complete) return Promise.resolve();
-    return new Promise((resolve) => {
-      image.addEventListener("load", resolve, { once: true });
-      image.addEventListener("error", resolve, { once: true });
-    });
-  }));
-}
-
-const fontsReady = document.fonts ? document.fonts.ready.catch(() => undefined) : Promise.resolve();
-Promise.all([fontsReady, waitForEagerImages()]).then(markComponentsReady);
-window.addEventListener("load", markComponentsReady, { once: true });
-window.setTimeout(markComponentsReady, 1600);
 if ("scrollRestoration" in history) {
   history.scrollRestoration = "manual";
 }

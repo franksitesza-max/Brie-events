@@ -30,7 +30,8 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
     <link rel="icon" href="/assets/brie-events-logo-and-favicon.jpg">
     <link rel="manifest" href="/site.webmanifest">
-    <link rel="stylesheet" href="/styles.css?v=20260811b">
+    <script src="/scripts/loading.js?v=20260811c"></script>
+    <link rel="stylesheet" href="/styles.css?v=20260811c">
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to main content</a>
@@ -56,7 +57,7 @@
       </div>
     </header>
     <main id="main">
-      <header class="content-hero">
+      <header data-load-component class="content-hero">
         <div class="container content-hero-grid">
           <div>
             <p class="eyebrow">Cake handover in the Helderberg</p>
@@ -68,11 +69,11 @@
             </div>
           </div>
           <figure class="content-hero-image">
-            <img src="/assets/gallery/briecakesproductimg-03-blue-birthday-sheet-cake.webp" alt="Blue and white birthday sheet cake made by Brie Cakes" loading="eager" fetchpriority="high">
+            <img src="/assets/gallery/briecakesproductimg-03-blue-birthday-sheet-cake.webp" width="532" height="593" alt="Blue and white birthday sheet cake made by Brie Cakes" loading="eager" fetchpriority="high">
           </figure>
         </div>
       </header>
-      <article class="section guide-content">
+      <article data-load-component class="section guide-content">
         <div class="container guide-layout">
           <section>
             <h2>Areas discussed for orders</h2>
@@ -107,7 +108,7 @@
           </aside>
         </div>
       </article>
-      <aside class="section guide-links-section" aria-labelledby="more-guides">
+      <aside data-load-component class="section guide-links-section" aria-labelledby="more-guides">
         <div class="container">
           <p class="eyebrow">More cake guidance</p>
           <h2 id="more-guides">Plan the rest of your order.</h2>

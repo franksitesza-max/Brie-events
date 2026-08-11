@@ -26,7 +26,7 @@ const mimeTypes = new Map([
 
 export const securityHeaders = {
   "Content-Security-Policy":
-    "default-src 'self'; img-src 'self' data:; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'sha256-AYNWVKX4Empb4DFpDFPp773/r/NqkpjBpTTXI113oyI='; connect-src 'none'; object-src 'none'; manifest-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests",
+    "default-src 'self'; img-src 'self' data:; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'sha256-8kchyQBPEpdg5RTriWOoi3QVqY4KKzktPXiqg+jSDXU='; connect-src 'none'; object-src 'none'; manifest-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests",
   "X-Content-Type-Options": "nosniff",
   "X-Frame-Options": "DENY",
   "Referrer-Policy": "strict-origin-when-cross-origin",

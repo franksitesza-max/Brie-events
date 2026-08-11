@@ -30,7 +30,8 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
     <link rel="icon" href="/assets/brie-events-logo-and-favicon.jpg">
     <link rel="manifest" href="/site.webmanifest">
-    <link rel="stylesheet" href="/styles.css?v=20260811b">
+    <script src="/scripts/loading.js?v=20260811c"></script>
+    <link rel="stylesheet" href="/styles.css?v=20260811c">
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to main content</a>
@@ -56,7 +57,7 @@
       </div>
     </header>
     <main id="main">
-      <header class="content-hero">
+      <header data-load-component class="content-hero">
         <div class="container content-hero-grid">
           <div>
             <p class="eyebrow">Kids themed cakes in Somerset West</p>
@@ -64,15 +65,16 @@
             <p class="lead">Brie Cakes makes personalised children's birthday cakes with age details, colour palettes, piping, toppers, and character-inspired themes. A focused brief keeps the design readable and the quote clear.</p>
             <div class="button-row">
               <a class="button button-primary" href="https://wa.me/27685533304?text=Hi%20Polite%2C%20I%27d%20like%20a%20cake%20quote.%20My%20event%20date%20is%20%5Bdate%5D." target="_blank" rel="noopener noreferrer">Ask Polite for a quote</a>
-              <a class="button button-secondary" href="/#gallery">See real cakes</a>
+              <a class="button button-secondary" href="/#gallery-title">See real cakes</a>
             </div>
           </div>
           <figure class="content-hero-image">
-            <img src="/assets/gallery/briecakesproductimg-13-spiderman-birthday-cake.webp" alt="White Spiderman third birthday cake made by Brie Cakes" loading="eager" fetchpriority="high">
+            <img src="/assets/featured/brie-cocomelon-cake-ai-upscale.webp" width="1536" height="1024" alt="AI-enhanced presentation of a Cocomelon first birthday cake made by Brie Cakes" loading="eager" fetchpriority="high">
+            <figcaption class="media-note">AI-enhanced presentation based on Polite's real Cocomelon cake in the homepage gallery.</figcaption>
           </figure>
         </div>
       </header>
-      <article class="section guide-content">
+      <article data-load-component class="section guide-content">
         <div class="container guide-layout">
           <section>
             <h2>Choose the details that carry the theme</h2>
@@ -100,7 +102,7 @@
           </aside>
         </div>
       </article>
-      <aside class="section guide-links-section" aria-labelledby="more-guides">
+      <aside data-load-component class="section guide-links-section" aria-labelledby="more-guides">
         <div class="container">
           <p class="eyebrow">More cake guidance</p>
           <h2 id="more-guides">Plan the rest of your order.</h2>

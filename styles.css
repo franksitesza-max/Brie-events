@@ -2557,3 +2557,205 @@ p {
     transition: none;
   }
 }
+
+/* Featured imagery and site-wide skeleton loading, 11 August 2026 */
+.hero-grid {
+  position: relative;
+  grid-template-columns: minmax(0, 1.06fr) minmax(360px, 0.94fr);
+  gap: 0;
+}
+
+.hero-copy {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-visual {
+  z-index: 1;
+  width: min(50vw, 38rem);
+  margin-left: -3.5rem;
+  padding: 0;
+}
+
+.hero-cake-card {
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.hero-cake-card img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 28px 34px rgba(71, 44, 43, 0.2));
+}
+
+.hero-cake-card figcaption {
+  right: auto;
+  bottom: 2.25rem;
+  left: -1.5rem;
+  max-width: 18rem;
+  border: 1px solid rgba(168, 50, 85, 0.16);
+  border-radius: 14px;
+  background: rgba(255, 250, 246, 0.9);
+  color: var(--color-chocolate);
+  padding: 0.7rem 0.85rem;
+  font-size: 0.72rem;
+  line-height: 1.35;
+  box-shadow: 0 14px 34px rgba(71, 44, 43, 0.12);
+  backdrop-filter: blur(12px);
+}
+
+.hero-cake-card figcaption span {
+  display: block;
+  margin-top: 0.12rem;
+  color: #756262;
+  font-size: 0.66rem;
+  font-weight: 500;
+}
+
+.content-hero-image {
+  position: relative;
+}
+
+.media-note {
+  position: absolute;
+  right: 0.8rem;
+  bottom: 0.8rem;
+  left: 0.8rem;
+  z-index: 3;
+  margin: 0;
+  border-radius: 12px;
+  background: rgba(52, 36, 36, 0.84);
+  color: var(--color-white);
+  padding: 0.65rem 0.75rem;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.72rem;
+  line-height: 1.4;
+  text-align: left;
+  backdrop-filter: blur(10px);
+}
+
+.skeleton-media {
+  position: relative;
+  isolation: isolate;
+}
+
+.skeleton-media::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  border-radius: inherit;
+  background:
+    linear-gradient(100deg, transparent 28%, rgba(255, 255, 255, 0.86) 45%, transparent 62%) 120% 0 / 220% 100%,
+    linear-gradient(145deg, #f9ece8, #efd5d7);
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 220ms ease, visibility 220ms ease;
+  animation: skeleton-sweep 1.15s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.skeleton-media > img {
+  opacity: 0;
+  transition: opacity 260ms ease;
+}
+
+.skeleton-media.media-ready::before {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.skeleton-media.media-ready > img {
+  opacity: 1;
+}
+
+.hero-cake-card.skeleton-media::before {
+  inset: 8% 6%;
+  border-radius: 46%;
+  background:
+    linear-gradient(100deg, transparent 28%, rgba(255, 255, 255, 0.82) 45%, transparent 62%) 120% 0 / 220% 100%,
+    radial-gradient(circle, rgba(244, 216, 216, 0.82), rgba(255, 248, 242, 0.42) 68%, transparent 69%);
+}
+
+.gallery-item.skeleton-media::before {
+  inset: 0.45rem 0.45rem 4.25rem;
+  border-radius: 23px;
+}
+
+.content-hero[data-load-component] {
+  --skeleton-height: clamp(21rem, 44vw, 34rem);
+}
+
+.legal-hero[data-load-component] {
+  --skeleton-height: clamp(9rem, 20vw, 14rem);
+}
+
+.guide-content[data-load-component],
+.legal-content[data-load-component] {
+  --skeleton-height: clamp(18rem, 34vw, 28rem);
+}
+
+@media (max-width: 940px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .hero-visual {
+    width: min(86vw, 34rem);
+    margin: -1rem auto 0;
+    justify-self: center;
+  }
+
+  .hero-cake-card figcaption {
+    right: 1rem;
+    bottom: 1.25rem;
+    left: auto;
+  }
+}
+
+@media (max-width: 680px) {
+  .hero-visual {
+    width: min(100%, 27rem);
+    margin-top: -0.5rem;
+    padding: 0;
+  }
+
+  .hero-cake-card figcaption {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    left: auto;
+    width: max-content;
+    max-width: 92%;
+    margin: -0.35rem auto 0;
+    text-align: center;
+  }
+
+  .media-note {
+    right: 0.55rem;
+    bottom: 0.55rem;
+    left: 0.55rem;
+    font-size: 0.68rem;
+  }
+
+  .gallery-item.skeleton-media::before {
+    bottom: 4.1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton-media::before {
+    animation: none;
+  }
+
+  .skeleton-media::before,
+  .skeleton-media > img {
+    transition: none;
+  }
+}
