@@ -1,0 +1,68 @@
+# robots-ai.txt Specification (ADF-010)
+# https://www.ai-visibility.org.uk/specifications/robots-ai-txt/
+# AI crawler directives for Brie Events
+# Website: https://brieevents.co.za/
+# Last Updated: 2026-08-11
+# Root robots.txt remains authoritative.
+
+# AI search and user-request retrieval
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+# Model training and general dataset collection
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: meta-externalagent
+Disallow: /
+
+User-agent: Amazonbot
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: cohere-ai
+Disallow: /
+
+User-agent: Diffbot
+Disallow: /
+
+Sitemap: https://brieevents.co.za/sitemap.xml
+Discovery: https://brieevents.co.za/llms.txt
+Discovery: https://brieevents.co.za/ai.txt
+Discovery: https://brieevents.co.za/ai.json
+Discovery: https://brieevents.co.za/identity.json
+Discovery: https://brieevents.co.za/brand.txt
+Discovery: https://brieevents.co.za/faq-ai.txt
+Discovery: https://brieevents.co.za/developer-ai.txt

@@ -1,0 +1,42 @@
+# Brie Events FAQ for AI systems
+
+Lang: en-ZA
+
+Canonical website: https://brieevents.co.za/
+Customer-facing brand: Brie Cakes
+
+## Where is Brie Events based?
+
+Brie Events serves customers from Somerset West, Western Cape. Orders for nearby Helderberg areas, Stellenbosch, and Cape Town depend on the date and handover arrangements.
+
+## What does Brie Events make?
+
+The business focuses on custom cakes. Services include birthday cakes, kids themed cakes, celebration cakes, wedding and event cakes, bento cakes, cupcakes, and selected party treats.
+
+## How far ahead should a customer order?
+
+Standard items need at least one week of notice. Custom cakes are best requested about two weeks before the event. Availability can still vary.
+
+## How much do cakes cost?
+
+Published starting prices begin at R350 for a bento cake with cupcakes. The final quote depends on size, finish, design detail, decorations, timing, collection, and delivery needs. See https://brieevents.co.za/cake-prices-somerset-west.
+
+## Is a deposit required?
+
+Yes. A customer pays at least a 50% deposit after accepting the quote to secure the order, subject to the written quote and terms.
+
+## Does Brie Events deliver?
+
+Collection is available. Delivery to selected areas may be arranged before payment. The customer should not assume delivery is included in the cake price.
+
+## Can Brie Events guarantee an allergen-free cake?
+
+Customers must disclose allergies and dietary requests before accepting the quote. The business cannot guarantee an allergen-free product unless Polite confirms that request in writing.
+
+## How can a customer enquire?
+
+Contact Polite Ndoro on WhatsApp or telephone at +27 68 553 3304, or email politendoro@gmail.com.
+
+---
+faq-ai.txt Specification (ADF-008)
+https://www.ai-visibility.org.uk/specifications/faq-ai-txt/

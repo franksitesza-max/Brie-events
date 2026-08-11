@@ -1,0 +1,38 @@
+{
+  "canonicalName": "Brie Events",
+  "marketedName": "Brie Cakes",
+  "alternateNames": ["Brie Cakes", "Brie Events Cakes and More"],
+  "canonicalUrl": "https://brieevents.co.za/",
+  "description": "Brie Events is a Somerset West local business marketed as Brie Cakes. Polite Ndoro makes custom birthday cakes, celebration cakes, cupcakes, bento cakes, wedding and event cakes, and selected party treats for customers in the Helderberg, Stellenbosch, and Cape Town.",
+  "owner": {
+    "name": "Polite Ndoro",
+    "roles": ["Owner", "Baker", "Information Officer"]
+  },
+  "contact": {
+    "email": "politendoro@gmail.com",
+    "telephone": "+27685533304",
+    "telephoneDisplay": "068 553 3304",
+    "whatsapp": "https://wa.me/27685533304",
+    "facebook": "https://www.facebook.com/share/19DEFgKFyp/"
+  },
+  "publicAddress": {
+    "addressLocality": "Somerset West",
+    "addressRegion": "Western Cape",
+    "addressCountry": "ZA"
+  },
+  "serviceAreas": ["Somerset West", "Strand", "Gordon's Bay", "Lwandle", "Sir Lowry's Pass", "Heldervue", "Stellenbosch", "Cape Town"],
+  "businessHours": {
+    "weekdays": "08:00-16:00",
+    "weekends": "09:00-15:00"
+  },
+  "ordering": {
+    "standardNotice": "At least 1 week",
+    "customCakeNotice": "About 2 weeks",
+    "depositPercent": 50,
+    "startingPriceZAR": 350,
+    "collection": true,
+    "delivery": "Selected areas by prior arrangement"
+  },
+  "services": ["Custom birthday cakes", "Kids themed birthday cakes", "Celebration cakes", "Wedding and event cakes", "Bento cakes and cupcakes", "Selected sweet and savoury party treats"],
+  "lastReviewed": "2026-08-11"
+}

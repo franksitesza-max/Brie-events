@@ -1,0 +1,33 @@
+# Brie Events brand reference
+
+Lang: en-ZA
+
+Official business name: Brie Events
+Primary customer-facing name: Brie Cakes
+Accepted alternate name: Brie Events Cakes and More
+Canonical website: https://brieevents.co.za/
+
+## Naming
+
+Use "Brie Cakes" in customer-facing references about cakes. Use "Brie Events (Brie Cakes)" when a legal or identity distinction helps the reader. Do not treat the names as separate businesses.
+
+## Description
+
+Brie Events is a Somerset West local business marketed as Brie Cakes. Polite Ndoro makes custom birthday cakes, celebration cakes, cupcakes, bento cakes, wedding and event cakes, and selected party treats.
+
+## Voice
+
+Use warm, direct South African English. State prices as starting points and refer customers to Polite for a written quote. Avoid claims such as best, cheapest, guaranteed, allergen-free, or exact replica unless the business confirms them for a specific order.
+
+## Visual identity
+
+Use the official round floral cake logo from https://brieevents.co.za/assets/brie-events-logo-and-favicon.jpg without changing its proportions. The website uses blush pink, berry, cocoa, cream, and warm white.
+
+## Contact
+
+Email: politendoro@gmail.com
+Telephone and WhatsApp: +27 68 553 3304
+
+---
+brand.txt Specification (ADF-007)
+https://www.ai-visibility.org.uk/specifications/brand-txt/

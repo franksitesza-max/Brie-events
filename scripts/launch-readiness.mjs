@@ -2,12 +2,13 @@ import { readFile, readdir } from "node:fs/promises";
 import { extname } from "node:path";
 
 const root = new URL("..", import.meta.url);
-const htmlFiles = ["index.html", "404.html"];
+const rootEntries = await readdir(root);
+const htmlFiles = rootEntries.filter((fileName) => extname(fileName).toLowerCase() === ".html");
 const blockingItems = [];
 const placeholderPattern = /\[[A-Za-z0-9][A-Za-z0-9 '&.,:/-]*\]/g;
 const emailPattern = /^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/;
 
-function collectPlaceholders(fileName, source) {
+export function collectPlaceholders(fileName, source) {
   const items = [];
   const lines = source.split(/\r?\n/);
 
@@ -50,15 +51,17 @@ for (const fileName of htmlFiles) {
 }
 
 const assetsPath = new URL("assets/", root);
-const assetFiles = await readdir(assetsPath);
+const assetFiles = await readdir(assetsPath, { recursive: true });
 const imageExtensions = new Set([".jpg", ".jpeg", ".png", ".webp", ".avif"]);
 const realGalleryImages = assetFiles.filter((fileName) => {
   const lowerName = fileName.toLowerCase();
-  return imageExtensions.has(extname(lowerName)) && !lowerName.includes("logo") && !lowerName.includes("favicon");
+  return imageExtensions.has(extname(lowerName))
+    && lowerName.includes("gallery")
+    && !lowerName.includes("profile");
 });
 
 if (realGalleryImages.length === 0) {
-  blockingItems.push("assets: add real Brie Cakes gallery photos before launch");
+  blockingItems.push("assets/gallery: add real Brie Cakes gallery photos before launch");
 }
 
 if (blockingItems.length > 0) {
@@ -69,4 +72,4 @@ if (blockingItems.length > 0) {
   process.exit(1);
 }
 
-console.log("Launch readiness check passed.");
+console.log(`Launch readiness check passed for ${htmlFiles.length} HTML files and ${realGalleryImages.length} gallery images.`);

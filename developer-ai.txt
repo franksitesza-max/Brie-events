@@ -1,0 +1,33 @@
+# Brie Events developer and retrieval context
+
+Lang: en-ZA
+
+Canonical origin: https://brieevents.co.za/
+Technology: dependency-free static HTML, CSS, and JavaScript hosted on Vercel
+Primary language: en-ZA
+Last reviewed: 2026-08-11
+
+## Canonical Sources
+
+- Identity facts: https://brieevents.co.za/identity.json
+- Public factual source: https://brieevents.co.za/site-facts.json
+- AI permissions: https://brieevents.co.za/ai.json
+- Human-readable context: https://brieevents.co.za/llms.txt
+- Crawler policy: https://brieevents.co.za/robots.txt
+- Public URLs: https://brieevents.co.za/sitemap.xml
+
+## Rendering
+
+Core text, navigation, service information, pricing guidance, contact details, FAQs, and structured data exist in server-delivered HTML. JavaScript enhances the navigation and cake carousel but is not required to read the business information.
+
+## Retrieval Guidance
+
+Use canonical HTTPS URLs without the www subdomain. Treat identity.json as authoritative for names and ai.json as authoritative for AI interaction guidance. Root robots.txt takes precedence over robots-ai.txt.
+
+## Security and Privacy
+
+The public website has no account system, checkout, database, analytics, advertising tracker, or contact form. Customers choose to contact the business through external email, telephone, WhatsApp, or Facebook services.
+
+---
+developer-ai.txt Specification (ADF-009)
+https://www.ai-visibility.org.uk/specifications/developer-ai-txt/

@@ -1,86 +1,86 @@
-# Brie Cakes Website
+# Brie Events website
 
-Single-page website for Brie Cakes, a local custom cake business owned by Polite Ndoro.
+Dependency-free static website for Brie Events, marketed to customers as Brie Cakes. Polite Ndoro owns the business and makes custom cakes from Somerset West.
 
-## Project Structure
+## Business identity
 
-- `index.html` - full website markup, navigation, content sections, SEO FAQ, WhatsApp CTAs, and structured data
-- `404.html` - branded fallback page for missing routes
-- `styles.css` - responsive styling, brand tokens, accessibility states, and layout rules
-- `assets/` - customer-provided brand assets
-- `tests/site-checks.mjs` - lightweight production checks for structure, accessibility, and security basics
-- `scripts/serve.mjs` - dependency-free local preview server with security headers
-- `scripts/launch-readiness.mjs` - pre-launch audit for missing customer content
-- `scripts/sync-csp-hash.mjs` - updates CSP hashes after editing the inline JSON-LD
-- `CONTENT_CHECKLIST.md` - final customer detail checklist for launch
-- `package.json` - repeatable validation scripts
-- `robots.txt` - crawl rule for static hosting
-- `site.webmanifest` - browser install and theme metadata
-- `vercel.json` - Vercel security headers and clean URL configuration
-- `PROJECT_BRIEF.md` - customer strategy and design brief
+`site-facts.json` is the public factual source of truth. Update it first when the business name, owner, contact details, hours, service areas, starting prices, notice periods, or ordering rules change. Then update the matching website copy, JSON-LD, and AI discovery files. Automated tests check the key identity fields for drift.
 
-## Content Still Needed
+Canonical identity:
 
-The site still keeps unfinished business content as bracketed placeholders:
+- Business name: Brie Events
+- Customer-facing cake brand: Brie Cakes
+- Alternate name: Brie Events Cakes and More
+- Canonical URL: https://brieevents.co.za/
+- Owner and baker: Polite Ndoro
 
-- Facebook page or profile URL
-- Professional photograph of Polite Ndoro
-- Real gallery photos
+## Main files
 
-## How To Run
+- `index.html`: homepage, cake carousel, service-area ribbon, FAQs, contact details, and JSON-LD
+- Five cake guide HTML files: unique local ordering guidance and search landing pages
+- `privacy.html` and `terms.html`: POPIA-aligned privacy notice and formal customer terms
+- `404.html`: noindex fallback served with a real HTTP 404
+- `styles.css`: responsive design system and accessible interaction states
+- `scripts/gooey-nav.js`: dependency-free active navigation effect adapted from the supplied React Bits concept
+- `scripts/carousel.js`: swipe, button, scroll, and keyboard cake-carousel behavior
+- `site-facts.json`: public business facts
+- `identity.json`: canonical machine-readable identity
+- `llms.txt`, `ai.txt`, `ai.json`, `brand.txt`, `faq-ai.txt`, `developer-ai.txt`, and `robots-ai.txt`: AI discovery suite
+- `robots.txt`: authoritative crawler policy
+- `vercel.json`: clean URLs, redirects, and deployed security headers
+- `tests/production-checks.mjs`: identity, SEO, HTML, crawler, CSP, and path-resolution checks
+- `tests/server-smoke.mjs`: live local HTTP status, route, redirect, header, and cookie checks
+- `.github/workflows/site-checks.yml`: CI validation
 
-Open `index.html` in a browser, or run the dependency-free local preview server:
+## Local preview
+
+Use Node.js 20 or newer.
 
 ```bash
 npm run serve
 ```
 
-On Windows PowerShell, if script execution is restricted, run:
+The local server supports Vercel-style clean HTML routes, the AI compatibility redirects, security headers, and the branded 404 page.
 
-```bash
-cmd.exe /c npm.cmd run serve
-```
+## Validation
 
-## How To Test
-
-Run the built-in checks with Node.js:
+Run all checks before deployment:
 
 ```bash
 npm test
-```
-
-On Windows PowerShell, if script execution is restricted, run:
-
-```bash
-cmd.exe /c npm.cmd test
-```
-
-The test checks required sections, WhatsApp pre-filled messaging, missing alt text, CSP framing protection, JSON-LD hash integrity, reduced-motion support, focus states, mobile breakpoint coverage, the 404 page, and crawl rules.
-
-Run the launch-readiness audit before publishing:
-
-```bash
 npm run check:launch
+npm run check:smoke
 ```
 
-That command fails while bracketed placeholders, invalid contact links, or missing gallery photos remain. It reports file names and line numbers so fixes are easy to find.
+The project has no npm dependencies and requires no install step.
 
-If you edit the structured data in `index.html`, update the CSP hashes before testing:
+## CSP hash workflow
+
+The homepage contains one inline JSON-LD block. Its SHA-256 hash must match the policies in `index.html`, `vercel.json`, and `scripts/serve.mjs`.
+
+After editing the JSON-LD:
 
 ```bash
 npm run sync:csp
+npm test
 ```
 
-On Windows PowerShell, use:
+The synchronisation script normalises line endings before hashing and changes only the hash inside `script-src`.
 
-```bash
-cmd.exe /c npm.cmd run sync:csp
-```
+## Crawler policy
 
-## Deployment Notes
+Search engines, AI search crawlers, and user-request retrieval agents may access public pages. The root `robots.txt` blocks documented model-training and general dataset crawlers. `robots-ai.txt` mirrors that decision and advertises the AI discovery files. Root `robots.txt` remains authoritative.
 
-Upload the full folder to any static host. Keep `index.html`, `404.html`, `styles.css`, `robots.txt`, `site.webmanifest`, `assets/`, and the favicon image path together.
+Review crawler names against first-party documentation before changing the policy.
 
-Keep `vercel.json` at the project root so the security headers deploy with the site.
+## Privacy and contact architecture
 
-Before launch, work through `CONTENT_CHECKLIST.md`, replace bracketed placeholders with real business information, add the Facebook link, and add actual Brie Cakes photography. Use optimized image formats where possible, and keep original filenames descriptive.
+The website has no form, account, checkout, database, analytics service, advertising tracker, or site cookie. Customers choose an external channel: WhatsApp, telephone, email, or Facebook. Vercel hosts the static files, and Google Fonts supplies web fonts.
+
+## Deployment and rollback
+
+Vercel should deploy this repository as a static site with `vercel.json` at the root. Keep clean URLs enabled and verify that missing routes return 404.
+
+The exact pre-project state is commit `4c1d277`, tagged `brie-baseline-2026-08-11`. Restore that tag on a separate branch if the new version needs to be abandoned. Do not move `main` until the preview passes the launch checklist.
+
+See `LAUNCH_CHECKLIST.md` for the release sequence.

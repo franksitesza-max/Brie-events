@@ -1,13 +1,13 @@
 {
-  "name": "Brie Cakes",
+  "name": "Brie Cakes by Brie Events",
   "short_name": "Brie Cakes",
-  "description": "Custom birthday cakes and celebration treats by Polite Ndoro.",
+  "description": "Custom birthday cakes and celebration treats in Somerset West by Polite Ndoro.",
   "id": "https://brieevents.co.za/",
   "start_url": "/",
   "scope": "/",
   "display": "minimal-ui",
-  "background_color": "#FAF7F5",
-  "theme_color": "#E8BCC1",
+  "background_color": "#FCFAF7",
+  "theme_color": "#F4D8D8",
   "icons": [
     {
       "src": "assets/brie-events-logo-and-favicon.jpg",

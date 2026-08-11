@@ -1,31 +1,59 @@
-# Brie Cakes
+# Brie Events
 
-> Custom cakes, birthday cakes, wedding cakes, baby shower cakes, and event cakes by Brie Cakes, serving Somerset West, Stellenbosch, and Cape Town.
+Lang: en-ZA
 
-Canonical site: https://brieevents.co.za/
-Brand: Brie Cakes
-Owner and baker: Polite Ndoro
-Primary service area: Somerset West, Western Cape, South Africa
-Additional service areas: Stellenbosch and Cape Town
-Contact: WhatsApp or call +27 68 553 3304
-Email: politendoro@gmail.com
+> Brie Events is a Somerset West local business marketed as Brie Cakes. Polite Ndoro makes custom birthday cakes, celebration cakes, cupcakes, bento cakes, wedding and event cakes, and selected party treats for customers in the Helderberg, Stellenbosch, and Cape Town.
+
+Brie Cakes is the customer-facing cake brand of Brie Events. The website focuses on cakes. "Brie Events Cakes and More" is an alternate form of the same business name.
+
+Canonical: https://brieevents.co.za/
 
 ## Services
 
-- Custom birthday cakes
-- Kids birthday cakes and themed birthday cakes
-- Personalised and bespoke cake designs
-- Wedding cakes and event cakes
-- Baby shower cakes, bridal shower cakes, engagement cakes, graduation cakes, and anniversary cakes
-- Cupcakes, bento cakes, sweet treats, and savoury party platters
+- [Custom cakes in Somerset West](https://brieevents.co.za/#cakes): Birthday, celebration, wedding, and event cakes made to order
+- [Birthday cakes in Somerset West](https://brieevents.co.za/birthday-cakes-somerset-west): Ordering guidance for custom birthday cakes
+- [Kids themed cakes](https://brieevents.co.za/kids-themed-cakes-somerset-west): Guidance for themed children's cake briefs
+- [Cake prices](https://brieevents.co.za/cake-prices-somerset-west): Current starting-price guide and quote factors
+- [Delivery and collection](https://brieevents.co.za/cake-delivery-collection-helderberg): Handover, transport, and storage guidance
+- [Bento cakes and cupcakes](https://brieevents.co.za/bento-cakes-cupcakes-somerset-west): Small-format celebration options
 
-## Ordering Notes
+## What We Do Not Do
 
-Standard items usually need at least 1 week notice. Custom cakes are best requested at least 2 weeks ahead. Pricing depends on size, flavor, theme, design detail, decorations, timing, collection, and delivery needs.
+- Brie Events does not publish a fixed price for every custom design; Polite confirms each quote from the final brief.
+- The business does not guarantee an allergen-free product unless Polite confirms the request in writing.
+- Delivery is not automatic for every order or area; customers must confirm availability before payment.
+- Inspiration photos guide the brief and do not guarantee an exact copy of another baker's work.
 
-## Crawler Policy
+## Contact
 
-Search engine crawlers and AI answer-engine crawlers are welcome to crawl and cite the public site. The canonical homepage and sitemap should be used as the source of truth:
+- Owner and baker: Polite Ndoro
+- Email: politendoro@gmail.com
+- Telephone and WhatsApp: +27 68 553 3304
+- Service address: Somerset West, Western Cape, South Africa
+- Contact page: https://brieevents.co.za/#contact
 
-- https://brieevents.co.za/
-- https://brieevents.co.za/sitemap.xml
+## Locations
+
+- Primary service area: Somerset West and the Helderberg
+- Additional areas by arrangement: Strand, Gordon's Bay, Lwandle, Sir Lowry's Pass, Heldervue, Stellenbosch, and Cape Town
+
+## Key Information
+
+- [Home](https://brieevents.co.za/): Services, real work, ordering steps, hours, and contact details
+- [Privacy Policy](https://brieevents.co.za/privacy): POPIA-aligned privacy information
+- [Terms of Service](https://brieevents.co.za/terms): Quote, deposit, cancellation, collection, and delivery terms
+- [Sitemap](https://brieevents.co.za/sitemap.xml): Indexable public pages
+
+## AI Discovery Files
+
+- [AI interaction guidance](https://brieevents.co.za/ai.txt)
+- [Machine-readable AI guidance](https://brieevents.co.za/ai.json)
+- [Canonical identity](https://brieevents.co.za/identity.json)
+- [Brand reference](https://brieevents.co.za/brand.txt)
+- [AI-readable FAQ](https://brieevents.co.za/faq-ai.txt)
+- [Developer context](https://brieevents.co.za/developer-ai.txt)
+- [AI crawler guidance](https://brieevents.co.za/robots-ai.txt)
+
+---
+llms.txt Specification (ADF-001)
+https://www.ai-visibility.org.uk/specifications/llms-txt/

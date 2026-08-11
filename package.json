@@ -2,13 +2,14 @@
   "name": "brie-cakes-static-site",
   "version": "1.0.0",
   "private": true,
-  "description": "Static single-page website for Brie Cakes.",
+  "description": "Dependency-free multipage website for Brie Events, marketed as Brie Cakes.",
   "type": "module",
   "scripts": {
-    "test": "node tests/site-checks.mjs",
-    "check": "node tests/site-checks.mjs",
+    "test": "node tests/production-checks.mjs",
+    "check": "node tests/production-checks.mjs",
     "serve": "node scripts/serve.mjs",
     "check:launch": "node scripts/launch-readiness.mjs",
+    "check:smoke": "node tests/server-smoke.mjs",
     "sync:csp": "node scripts/sync-csp-hash.mjs"
   },
   "license": "UNLICENSED"

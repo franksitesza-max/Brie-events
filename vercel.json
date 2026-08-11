@@ -5,7 +5,7 @@
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self' https://brieevents.co.za https://www.brieevents.co.za https://*.vercel.app; img-src 'self' data: https://brieevents.co.za https://www.brieevents.co.za https://*.vercel.app; style-src 'self' https://brieevents.co.za https://www.brieevents.co.za https://*.vercel.app https://fonts.googleapis.com; font-src 'self' https://brieevents.co.za https://www.brieevents.co.za https://*.vercel.app https://fonts.gstatic.com; script-src 'self' https://brieevents.co.za https://www.brieevents.co.za https://*.vercel.app 'sha256-philOtFwU9evUtVrGD/WszwKgzmFY1Z34dEJeNggDNY='; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests"
+          "value": "default-src 'self'; img-src 'self' data:; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'sha256-AYNWVKX4Empb4DFpDFPp773/r/NqkpjBpTTXI113oyI='; connect-src 'none'; object-src 'none'; manifest-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests"
         },
         {
           "key": "X-Content-Type-Options",
@@ -31,6 +31,16 @@
     }
   ],
   "redirects": [
+    {
+      "source": "/llm.txt",
+      "destination": "/llms.txt",
+      "permanent": true
+    },
+    {
+      "source": "/llms.html",
+      "destination": "/llms.txt",
+      "permanent": true
+    },
     {
       "source": "/:path*",
       "has": [

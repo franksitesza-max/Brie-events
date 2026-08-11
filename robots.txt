@@ -1,44 +1,61 @@
+# Public search indexing is allowed. Documented model-training crawlers are blocked.
 User-agent: *
 Allow: /
 
-# Search engines and AI answer engines are intentionally welcome.
-User-agent: Googlebot
-Allow: /
-
-User-agent: Googlebot-Image
-Allow: /
-
-User-agent: Google-InspectionTool
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
+# OpenAI search and user-request retrieval
 User-agent: OAI-SearchBot
-Allow: /
-
-User-agent: GPTBot
 Allow: /
 
 User-agent: ChatGPT-User
 Allow: /
 
-User-agent: ClaudeBot
-Allow: /
-
+# Anthropic search and user-request retrieval
 User-agent: Claude-SearchBot
 Allow: /
 
 User-agent: Claude-User
 Allow: /
 
+# Perplexity search and user-request retrieval
 User-agent: PerplexityBot
 Allow: /
 
 User-agent: Perplexity-User
 Allow: /
 
-User-agent: Google-Extended
+# You.com search
+User-agent: YouBot
 Allow: /
+
+# Documented training and dataset crawlers
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: meta-externalagent
+Disallow: /
+
+User-agent: Amazonbot
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: cohere-ai
+Disallow: /
+
+User-agent: Diffbot
+Disallow: /
 
 Sitemap: https://brieevents.co.za/sitemap.xml
