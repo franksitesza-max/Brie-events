@@ -24,6 +24,7 @@ Canonical identity:
 - `scripts/loading.js`: shared page and image skeleton readiness controller used by every HTML route
 - `assets/featured/`: approved presentation imagery used in hero and guide-page compositions
 - `scripts/gooey-nav.js`: dependency-free active navigation effect adapted from the supplied React Bits concept
+- `scripts/molten-metal.js`: dependency-free WebGL2 adaptation of the supplied React Bits Molten Metal effect for the homepage promise section
 - `scripts/carousel.js`: swipe, button, scroll, and keyboard cake-carousel behavior
 - `site-facts.json`: public business facts
 - `identity.json`: canonical machine-readable identity

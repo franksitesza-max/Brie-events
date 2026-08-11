@@ -56,6 +56,8 @@ assert.ok(index.includes('data-carousel'), "Swipeable cake carousel must remain.
 assert.ok(index.includes('service-ribbon-track'), "Moving location ribbon must remain.");
 assert.ok(index.includes('data-gooey-nav'), "Gooey navigation structure is missing.");
 assert.ok(index.includes('scripts/gooey-nav.js'), "Gooey navigation script is missing.");
+assert.ok(index.includes('scripts/molten-metal.js'), "Molten Metal promise background is missing.");
+assert.ok(index.includes('data-molten-metal'), "Molten Metal canvas mount is missing.");
 assert.ok(css.includes("@keyframes nav-particle"));
 assert.ok(css.includes("@keyframes service-ribbon-scroll"));
 assert.ok(css.includes("scroll-snap-type: inline mandatory"));
@@ -68,6 +70,7 @@ assert.ok(kidsPage.includes("assets/featured/brie-cocomelon-cake-ai-upscale.webp
 assert.ok(kidsPage.includes("based on Polite's real Cocomelon cake"));
 assert.ok(css.includes(".skeleton-media"));
 assert.ok(css.includes(".skeleton-media.media-ready"));
+assert.ok(css.includes("prefers-reduced-motion"), "Animated effects need a reduced-motion fallback.");
 assert.ok(loadingScript.includes("prepareImageSkeleton"));
 for (const [name, html] of htmlFiles) {
   assert.ok(html.includes("scripts/loading.js"), `${name} must load the shared skeleton controller.`);

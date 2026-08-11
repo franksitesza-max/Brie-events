@@ -2782,3 +2782,63 @@ p {
     transition: none;
   }
 }
+
+/* React Bits Molten Metal concept, adapted for the dependency-free homepage promise section. */
+.slogan-section {
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 22% 0%, rgba(211, 111, 77, 0.34), transparent 28rem),
+    #210b11;
+}
+
+.molten-metal {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.molten-metal canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.slogan-section::after {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 48%, rgba(20, 7, 11, 0.52), rgba(20, 7, 11, 0.72) 76%),
+    linear-gradient(90deg, rgba(20, 7, 11, 0.56), rgba(20, 7, 11, 0.22) 50%, rgba(20, 7, 11, 0.56));
+  content: "";
+  pointer-events: none;
+}
+
+.slogan-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 880px;
+}
+
+.slogan-section .eyebrow {
+  color: #ffd9df;
+  text-shadow: 0 1px 18px rgba(0, 0, 0, 0.6);
+}
+
+.slogan-section h2 {
+  color: #fffdf9;
+  text-shadow: 0 3px 30px rgba(0, 0, 0, 0.82);
+}
+
+.slogan-section p:not(.eyebrow) {
+  color: rgba(255, 253, 249, 0.92);
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.82);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .molten-metal canvas {
+    opacity: 0.82;
+  }
+}
