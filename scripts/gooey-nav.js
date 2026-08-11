@@ -12,8 +12,8 @@ if (gooeyNav) {
     const containerRect = gooeyNav.getBoundingClientRect();
     const itemRect = item.getBoundingClientRect();
     const styles = {
-      left: `${itemRect.left - containerRect.left}px`,
-      top: `${itemRect.top - containerRect.top}px`,
+      left: `${itemRect.left - containerRect.left + gooeyNav.scrollLeft}px`,
+      top: `${itemRect.top - containerRect.top + gooeyNav.scrollTop}px`,
       width: `${itemRect.width}px`,
       height: `${itemRect.height}px`
     };
@@ -73,7 +73,8 @@ if (gooeyNav) {
     .map((item) => {
       const href = item.querySelector("a")?.getAttribute("href") ?? "";
       if (!href.startsWith("#")) return null;
-      const section = document.querySelector(href);
+      const target = document.querySelector(href);
+      const section = target?.closest("section") ?? target;
       return section ? { item, section } : null;
     })
     .filter(Boolean);
@@ -103,6 +104,7 @@ if (gooeyNav) {
   if ("ResizeObserver" in window) {
     new ResizeObserver(positionInitial).observe(gooeyNav);
   }
+  gooeyNav.addEventListener("scroll", positionInitial, { passive: true });
   window.addEventListener("load", positionInitial, { once: true });
   requestAnimationFrame(positionInitial);
 }

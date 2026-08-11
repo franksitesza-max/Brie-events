@@ -58,6 +58,12 @@ assert.ok(index.includes('scripts/gooey-nav.js'), "Gooey navigation script is mi
 assert.ok(css.includes("@keyframes nav-particle"));
 assert.ok(css.includes("@keyframes service-ribbon-scroll"));
 assert.ok(css.includes("scroll-snap-type: inline mandatory"));
+assert.match(css, /scroll-behavior:\s*smooth/, "CSS smooth scrolling must remain enabled.");
+assert.ok(index.includes('href="#cakes-title"'));
+assert.ok(index.includes('href="#pricing-title"'));
+assert.ok(index.includes('href="#gallery-title"'));
+assert.ok(index.includes('href="#contact-title"'));
+assert.doesNotMatch(index, /hero-stamp|Made to order/, "Removed hero badge must stay removed.");
 
 const jsonLdMatch = index.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
 assert.ok(jsonLdMatch, "Homepage JSON-LD is missing.");
