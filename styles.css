@@ -2842,3 +2842,39 @@ p {
     opacity: 0.82;
   }
 }
+/* Featured image corrections, 12 August 2026 */
+@media (min-width: 941px) {
+  .hero-visual {
+    width: min(52vw, 40rem);
+    margin-left: -6rem;
+  }
+}
+
+.content-hero-image--wide {
+  width: min(100%, 42rem);
+  border-radius: 26px;
+}
+
+.content-hero-image--wide img {
+  display: block;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: contain;
+  object-position: center;
+}
+
+@media (max-width: 940px) {
+  .content-hero-image--wide {
+    width: min(100%, 38rem);
+  }
+}
+
+@media (max-width: 680px) {
+  .content-hero-image--wide {
+    width: 100%;
+  }
+
+  .content-hero-image--wide img {
+    height: auto;
+  }
+}

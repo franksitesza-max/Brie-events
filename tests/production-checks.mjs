@@ -62,12 +62,12 @@ assert.ok(css.includes("@keyframes nav-particle"));
 assert.ok(css.includes("@keyframes service-ribbon-scroll"));
 assert.ok(css.includes("scroll-snap-type: inline mandatory"));
 assert.match(css, /scroll-behavior:\s*smooth/, "CSS smooth scrolling must remain enabled.");
-assert.ok(index.includes("assets/featured/brie-butterfly-cake-hero.webp"));
+assert.ok(index.includes("assets/featured/brie-butterfly-cake-hero-transparent.png"));
 assert.ok(index.includes("assets/gallery/briecakesproductimg-15-cocomelon-first-birthday-cake-real.webp"));
-assert.ok(index.includes("AI-enhanced presentation"));
+assert.doesNotMatch(index, /AI-enhanced presentation/, "Featured image banners must stay removed.");
 const kidsPage = htmlFiles.get("kids-themed-cakes-somerset-west.html");
 assert.ok(kidsPage.includes("assets/featured/brie-cocomelon-cake-ai-upscale.webp"));
-assert.ok(kidsPage.includes("based on Polite's real Cocomelon cake"));
+assert.doesNotMatch(kidsPage, /AI-enhanced presentation/, "Kids featured image banner must stay removed.");
 assert.ok(css.includes(".skeleton-media"));
 assert.ok(css.includes(".skeleton-media.media-ready"));
 assert.ok(css.includes("prefers-reduced-motion"), "Animated effects need a reduced-motion fallback.");
@@ -76,7 +76,7 @@ for (const [name, html] of htmlFiles) {
   assert.ok(html.includes("scripts/loading.js"), `${name} must load the shared skeleton controller.`);
 }
 for (const asset of [
-  "assets/featured/brie-butterfly-cake-hero.webp",
+  "assets/featured/brie-butterfly-cake-hero-transparent.png",
   "assets/featured/brie-cocomelon-cake-ai-upscale.webp",
   "assets/gallery/briecakesproductimg-15-cocomelon-first-birthday-cake-real.webp"
 ]) {
