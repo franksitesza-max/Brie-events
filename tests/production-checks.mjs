@@ -81,6 +81,8 @@ assert.ok(kidsPage.includes("assets/featured/brie-cocomelon-cake-ai-upscale.webp
 assert.doesNotMatch(kidsPage, /AI-enhanced presentation/, "Kids featured image banner must stay removed.");
 assert.ok(css.includes(".skeleton-media"));
 assert.ok(css.includes(".skeleton-media.media-ready"));
+assert.match(css, /@media \(max-width: 680px\)[\s\S]*?\.hero-copy \{\s*position: relative;\s*z-index: 2;[\s\S]*?\.hero-visual \{\s*position: absolute;\s*z-index: 1;/, "Mobile hero cake must sit behind the text.");
+assert.match(css, /@media \(max-width: 680px\)[\s\S]*?\.hero-cake-card \{\s*opacity: 1;/, "Mobile hero cake must remain vibrant.");
 assert.ok(css.includes("prefers-reduced-motion"), "Animated effects need a reduced-motion fallback.");
 assert.ok(loadingScript.includes("prepareImageSkeleton"));
 for (const [name, html] of htmlFiles) {
