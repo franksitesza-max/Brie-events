@@ -31,6 +31,9 @@ try {
     const response = await request(path);
     assert.equal(response.status, 200, `${path} should return 200.`);
     assert.ok(response.headers.get("content-security-policy"), `${path} needs CSP.`);
+    assert.equal(response.headers.get("cross-origin-opener-policy"), "same-origin");
+    assert.equal(response.headers.get("x-permitted-cross-domain-policies"), "none");
+    assert.equal(response.headers.get("origin-agent-cluster"), "?1");
     assert.equal(response.headers.get("set-cookie"), null, `${path} must not set a cookie.`);
   }
 
@@ -49,6 +52,8 @@ try {
 
   const post = await request("/", { method: "POST" });
   assert.equal(post.status, 405);
+  assert.equal(post.headers.get("allow"), "GET, HEAD");
+  assert.equal(post.headers.get("cache-control"), "no-store");
 
   const head = await request("/privacy", { method: "HEAD" });
   assert.equal(head.status, 200);

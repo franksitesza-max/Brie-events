@@ -26,16 +26,21 @@ const mimeTypes = new Map([
 
 export const securityHeaders = {
   "Content-Security-Policy":
-    "default-src 'self'; img-src 'self' data:; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'sha256-8kchyQBPEpdg5RTriWOoi3QVqY4KKzktPXiqg+jSDXU='; connect-src 'none'; object-src 'none'; manifest-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests",
+    "default-src 'self'; img-src 'self' data:; style-src 'self' https://fonts.googleapis.com; style-src-attr 'none'; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'sha256-8kchyQBPEpdg5RTriWOoi3QVqY4KKzktPXiqg+jSDXU='; script-src-attr 'none'; connect-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests",
   "X-Content-Type-Options": "nosniff",
   "X-Frame-Options": "DENY",
   "Referrer-Policy": "strict-origin-when-cross-origin",
-  "Permissions-Policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+  "Permissions-Policy": "accelerometer=(), autoplay=(), browsing-topics=(), camera=(), display-capture=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()",
+  "Cross-Origin-Opener-Policy": "same-origin",
+  "X-Permitted-Cross-Domain-Policies": "none",
+  "Origin-Agent-Cluster": "?1"
 };
 
-function sendText(response, status, message) {
+function sendText(response, status, message, extraHeaders = {}) {
   response.writeHead(status, {
     ...securityHeaders,
+    ...extraHeaders,
+    "Cache-Control": "no-store",
     "Content-Type": "text/plain; charset=utf-8",
     "Content-Length": Buffer.byteLength(message)
   });
@@ -80,7 +85,7 @@ async function resolveExistingFile(requestedPath) {
 export function createPreviewServer({ host = defaultHost, port = defaultPort } = {}) {
   return createServer(async (request, response) => {
     if (request.method !== "GET" && request.method !== "HEAD") {
-      sendText(response, 405, "Method not allowed");
+      sendText(response, 405, "Method not allowed", { Allow: "GET, HEAD" });
       return;
     }
 

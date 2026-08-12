@@ -39,8 +39,13 @@ assert.equal(ai.url, facts.canonicalUrl);
 assert.equal(identity.url, facts.canonicalUrl);
 assert.equal(identity.description, facts.description);
 assert.ok(identity.alternateNames.includes(facts.marketedName));
+assert.deepEqual(identity.areaServed, facts.serviceAreas);
+assert.equal(identity.metadata.lastUpdated, facts.lastReviewed);
+assert.equal(ai.metadata.lastUpdated, facts.lastReviewed);
 assert.ok(llms.startsWith("# Brie Events\n"));
 assert.match(llms, /## Contact/);
+assert.match(llms, /## Verified Buyer Answers/);
+assert.match(llms, /## Preferred Sources by Question/);
 assert.match(llms, /https:\/\/brieevents\.co\.za\/identity\.json/);
 assert.match(aiText, /Do not use this website's content for model training/);
 
@@ -50,7 +55,7 @@ for (const file of ["ai.json", "identity.json", "site-facts.json", "site.webmani
 }
 
 assert.ok(index.includes("Custom Cakes Somerset West"));
-assert.ok(index.includes("Birthday cakes made for your people"));
+assert.ok(index.includes("Custom birthday cakes in Somerset West, made by Polite Ndoro."));
 assert.ok(!/<meta\s+name="keywords"/i.test(index), "Obsolete meta keywords tag must stay removed.");
 assert.ok(index.includes('data-carousel'), "Swipeable cake carousel must remain.");
 assert.ok(index.includes('service-ribbon-track'), "Moving location ribbon must remain.");
@@ -88,6 +93,14 @@ assert.ok(index.includes('href="#pricing-content"'));
 assert.ok(index.includes('href="#gallery-title"'));
 assert.ok(index.includes('href="#contact-title"'));
 assert.doesNotMatch(index, /hero-stamp|Made to order/, "Removed hero badge must stay removed.");
+for (const phrase of [
+  "Birthday cakes made for your people",
+  "A custom quote for every cake brief",
+  "Useful answers for a smoother cake order",
+  "Every order is shaped around"
+]) {
+  assert.ok(!index.includes(phrase), `Vague marketing phrase returned: ${phrase}`);
+}
 
 const jsonLdMatch = index.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
 assert.ok(jsonLdMatch, "Homepage JSON-LD is missing.");
@@ -106,11 +119,19 @@ assert.equal(cspHash, `sha256-${createHash("sha256").update(jsonLdMatch[1].repla
 assert.ok(index.includes(cspHash));
 const deployedCsp = vercel.headers[0].headers.find((header) => header.key === "Content-Security-Policy")?.value;
 assert.equal(deployedCsp, securityHeaders["Content-Security-Policy"]);
-for (const directive of ["object-src 'none'", "connect-src 'none'", "manifest-src 'self'", "frame-ancestors 'none'"]) {
+for (const directive of ["object-src 'none'", "connect-src 'none'", "media-src 'none'", "frame-src 'none'", "worker-src 'none'", "script-src-attr 'none'", "style-src-attr 'none'", "manifest-src 'self'", "frame-ancestors 'none'"]) {
   assert.ok(deployedCsp.includes(directive), `Missing CSP directive: ${directive}`);
 }
 assert.ok(!deployedCsp.includes("*.vercel.app"));
 assert.ok(!index.includes("*.vercel.app"));
+for (const [header, expected] of Object.entries({
+  "Cross-Origin-Opener-Policy": "same-origin",
+  "X-Permitted-Cross-Domain-Policies": "none",
+  "Origin-Agent-Cluster": "?1"
+})) {
+  assert.equal(vercel.headers[0].headers.find((entry) => entry.key === header)?.value, expected);
+  assert.equal(securityHeaders[header], expected);
+}
 
 const hashFixture = "style-src 'sha256-stylehash='; script-src 'self' 'sha256-oldhash='; object-src 'none'";
 const replacedFixture = replaceJsonLdCspHash(hashFixture, "sha256-newhash=", "fixture");
@@ -129,6 +150,13 @@ assert.match(notFound, /href="\/"/);
 for (const [name, html] of htmlFiles) {
   assert.match(html, /name="viewport"/, `${name} needs a viewport meta tag.`);
   assert.match(html, /Content-Security-Policy/, `${name} needs a CSP meta tag.`);
+  if (name !== "404.html") {
+    assert.match(html, /name="description"[\s\S]*?content="[^"]+"/, `${name} needs a meta description.`);
+    assert.match(html, /rel="canonical" href="https:\/\/brieevents\.co\.za\/[^"]*"/, `${name} needs an absolute canonical URL.`);
+    assert.match(html, /property="og:image:secure_url" content="https:\/\/brieevents\.co\.za\/[^"]+"/, `${name} needs a secure Open Graph image URL.`);
+    assert.match(html, /property="og:image:width" content="\d+"/, `${name} needs Open Graph image width.`);
+    assert.match(html, /property="og:image:height" content="\d+"/, `${name} needs Open Graph image height.`);
+  }
   const blankTargets = html.match(/<a\b[^>]*target="_blank"[^>]*>/g) ?? [];
   for (const anchor of blankTargets) {
     assert.match(anchor, /rel="[^"]*noopener[^"]*noreferrer[^"]*"/, `${name} has an unsafe blank-target link.`);
@@ -160,7 +188,10 @@ const publicSlugs = [
 for (const slug of publicSlugs) {
   assert.ok(sitemap.includes(`<loc>https://brieevents.co.za/${slug}</loc>`));
 }
-assert.equal((sitemap.match(/<lastmod>2026-08-11<\/lastmod>/g) ?? []).length, publicSlugs.length);
+const sitemapDates = [...sitemap.matchAll(/<lastmod>(\d{4}-\d{2}-\d{2})<\/lastmod>/g)].map((match) => match[1]);
+assert.equal(sitemapDates.length, publicSlugs.length);
+assert.ok(sitemapDates.every((date) => date <= facts.lastReviewed));
+assert.equal(sitemapDates.filter((date) => date === facts.lastReviewed).length, 6);
 
 for (const agent of ["OAI-SearchBot", "ChatGPT-User", "Claude-SearchBot", "Claude-User", "PerplexityBot", "Perplexity-User"]) {
   assert.match(robots, new RegExp(`User-agent: ${agent}\\nAllow: /`));

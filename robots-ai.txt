@@ -2,7 +2,7 @@
 # https://www.ai-visibility.org.uk/specifications/robots-ai-txt/
 # AI crawler directives for Brie Events
 # Website: https://brieevents.co.za/
-# Last Updated: 2026-08-11
+# Last Updated: 2026-08-12
 # Root robots.txt remains authoritative.
 
 # AI search and user-request retrieval
