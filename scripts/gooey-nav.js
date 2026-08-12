@@ -27,17 +27,17 @@ if (gooeyNav) {
     effect.querySelectorAll(".nav-particle").forEach((particle) => particle.remove());
     const colors = ["#f3c2c9", "#d66a82", "#7f4d57", "#f7ded8"];
 
-    for (let index = 0; index < 12; index += 1) {
-      const angle = (Math.PI * 2 * index) / 12 + (Math.random() - 0.5) * 0.25;
-      const distance = 28 + Math.random() * 30;
+    for (let index = 0; index < 24; index += 1) {
+      const angle = (Math.PI * 2 * index) / 24 + (Math.random() - 0.5) * 0.2;
+      const distance = 30 + Math.random() * 38;
       const particle = document.createElement("span");
       particle.className = "nav-particle";
       particle.style.setProperty("--particle-x", `${Math.cos(angle) * distance}px`);
       particle.style.setProperty("--particle-y", `${Math.sin(angle) * distance}px`);
-      particle.style.setProperty("--particle-scale", (0.6 + Math.random() * 0.55).toFixed(2));
+      particle.style.setProperty("--particle-scale", (0.7 + Math.random() * 0.72).toFixed(2));
       particle.style.setProperty("--particle-color", colors[index % colors.length]);
       effect.appendChild(particle);
-      window.setTimeout(() => particle.remove(), 720);
+      window.setTimeout(() => particle.remove(), 820);
     }
   }
 

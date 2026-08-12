@@ -84,7 +84,7 @@ h1 {
   max-width: 12ch;
   margin-inline: auto;
   margin-bottom: 1.25rem;
-  font-size: clamp(2.25rem, 5.8vw, 4.75rem);
+  font-size: clamp(1.575rem, 4.06vw, 3.325rem);
 }
 
 h2 {
@@ -335,7 +335,7 @@ html.is-loading .site-header {
 .hero-title-area h1 {
   max-width: 12ch;
   margin-inline: auto;
-  font-size: clamp(2.025rem, 5.22vw, 4.275rem);
+  font-size: clamp(1.418rem, 3.654vw, 2.993rem);
 }
 
 .hero-copy .lead {
@@ -617,7 +617,7 @@ html.is-loading .site-header {
 .slogan-section h2 {
   max-width: 15ch;
   color: var(--color-white);
-  font-size: clamp(2.25rem, 5vw, 4rem);
+  font-size: clamp(1.575rem, 3.5vw, 2.8rem);
 }
 
 .slogan-section p:not(.eyebrow) {
@@ -1127,7 +1127,7 @@ html.is-loading .site-header {
 
 .error-shell h1 {
   max-width: 13ch;
-  font-size: clamp(2.25rem, 7vw, 4rem);
+  font-size: clamp(1.575rem, 4.9vw, 2.8rem);
 }
 
 .error-shell p:not(.eyebrow) {
@@ -1408,7 +1408,7 @@ h3 {
 h1 {
   max-width: 11ch;
   margin-inline: 0;
-  font-size: clamp(2.8rem, 6.8vw, 6rem);
+  font-size: clamp(1.96rem, 4.76vw, 4.2rem);
   line-height: 0.98;
 }
 
@@ -1571,12 +1571,13 @@ p {
   top: calc(50% - 5px);
   left: calc(50% - 5px);
   z-index: -1;
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
   background: var(--particle-color);
   pointer-events: none;
-  animation: nav-particle 700ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  box-shadow: 0 0 10px color-mix(in srgb, var(--particle-color) 76%, transparent);
+  animation: nav-particle 800ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 
 @keyframes nav-text-pop {
@@ -2487,7 +2488,7 @@ p {
 
   .hero-copy h1 {
     max-width: 12ch;
-    font-size: clamp(2.15rem, 10.8vw, 3rem);
+    font-size: clamp(1.505rem, 7.56vw, 2.1rem);
   }
 
   .hero .button-row,
@@ -2927,4 +2928,73 @@ p {
   .content-hero-image--wide img {
     height: auto;
   }
+}
+/* Compact landing hero with a quiet reading surface above the overlapping cake. */
+.hero {
+  padding-block: clamp(0.9rem, 2.1vw, 1.45rem) clamp(1.8rem, 3.4vw, 3.25rem);
+}
+
+.hero-copy::before {
+  position: absolute;
+  top: -0.9rem;
+  left: -1.15rem;
+  z-index: -1;
+  width: min(100% + 2.3rem, 45rem);
+  height: clamp(13.25rem, 19vw, 16.75rem);
+  border: 1px solid rgba(255, 255, 255, 0.62);
+  border-radius: 1.65rem;
+  background: linear-gradient(105deg, rgba(255, 253, 250, 0.88), rgba(255, 250, 246, 0.64) 68%, rgba(255, 250, 246, 0.18));
+  box-shadow: 0 14px 38px rgba(71, 44, 43, 0.08);
+  content: "";
+  backdrop-filter: blur(6px);
+}
+
+.hero-copy h1,
+.hero-copy .lead {
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.72);
+}
+
+@media (max-width: 680px) {
+  .hero {
+    padding-block: 0.75rem 1.85rem;
+  }
+
+  .hero-grid {
+    min-height: 35.5rem;
+  }
+
+  .hero-copy::before {
+    top: -0.45rem;
+    left: -0.6rem;
+    width: calc(100% + 1.2rem);
+    height: 15.35rem;
+    border-radius: 1.3rem;
+    background: linear-gradient(150deg, rgba(255, 253, 250, 0.91), rgba(255, 250, 246, 0.72) 72%, rgba(255, 250, 246, 0.32));
+  }
+
+  .hero-visual {
+    top: 0.7rem;
+    right: -3.8rem;
+    width: min(78vw, 21.5rem);
+  }
+}
+/* Preserve navigation landmarks while the gallery carries the What we make section. */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+#cakes .section-heading {
+  margin-bottom: 1.15rem;
+}
+
+#service-areas {
+  padding-block: clamp(1.35rem, 3vw, 2.35rem);
 }

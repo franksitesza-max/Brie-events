@@ -67,6 +67,7 @@ assert.ok(index.includes('data-carousel'), "Swipeable cake carousel must remain.
 assert.ok(index.includes('service-ribbon-track'), "Moving location ribbon must remain.");
 assert.ok(index.includes('data-gooey-nav'), "Gooey navigation structure is missing.");
 assert.ok(index.includes('scripts/gooey-nav.js'), "Gooey navigation script is missing.");
+assert.match(await read("scripts/gooey-nav.js"), /index < 24/, "Header navigation should use a visible particle field.");
 assert.ok(index.includes('scripts/molten-metal.js'), "Molten Metal promise background is missing.");
 assert.ok(index.includes('data-molten-metal'), "Molten Metal canvas mount is missing.");
 assert.ok(css.includes("@keyframes nav-particle"));
@@ -97,6 +98,11 @@ for (const asset of [
   assert.ok(bytes.length > 40_000, `${asset} appears incomplete.`);
 }
 assert.ok(index.includes('href="#cakes-title"'));
+assert.match(index, /<section class="section section-tint" id="cakes"[\s\S]*?<div class="gallery-stage">/, "What we make should contain the gallery carousel.");
+assert.ok(index.indexOf('id="cakes"') < index.indexOf('id="about"'), "Chef section should follow What we make.");
+assert.ok(index.indexOf('id="about"') < index.indexOf('id="service-areas"'), "Moving service ribbon should follow chef section.");
+assert.doesNotMatch(index, /Previous work|Real cakes made by Brie Cakes|Browse real custom cakes|Birthday cakes, celebration cakes, cupcakes, and event cakes|Local cake orders|Custom cakes for Somerset West, Stellenbosch, and Cape Town events/);
+assert.match(css, /\.hero-title-area h1 \{[\s\S]*?font-size: clamp\(1\.418rem, 3\.654vw, 2\.993rem\);/, "Primary hero heading should be reduced by 30%.");
 assert.ok(index.includes('href="#pricing-content"'));
 assert.ok(index.includes('href="#gallery-title"'));
 assert.ok(index.includes('href="#contact-title"'));
@@ -209,6 +215,10 @@ assert.equal(resolveRequestPath("/%E0%A4%A", fixtureRoot).status, 400);
 assert.equal(resolveRequestPath("/%2e%2e/fixture-root-sibling/secret.txt", fixtureRoot).status, 403);
 
 assert.match(notFound, /name="robots" content="noindex, follow"/);
+assert.match(htmlFiles.get("privacy.html"), /name="robots" content="noindex, follow"/);
+assert.match(htmlFiles.get("terms.html"), /name="robots" content="noindex, follow"/);
+assert.doesNotMatch(htmlFiles.get("privacy.html"), /Information Officer|information officer/);
+assert.ok([...htmlFiles.values()].every((html) => !html.includes('href="/sitemap.xml"')), "Sitemap should not be linked in the visible footer.");
 assert.match(notFound, /href="\/"/);
 
 for (const [name, html] of htmlFiles) {
