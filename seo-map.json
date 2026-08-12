@@ -1,0 +1,68 @@
+{
+  "version": "1.0.0",
+  "lastReviewed": "2026-08-12",
+  "strategy": "Use each primary phrase where it accurately describes the page. Support it with buyer questions and real business facts; do not duplicate the same page for suburb variants.",
+  "pages": [
+    {
+      "path": "/",
+      "primaryIntent": "custom cakes Somerset West",
+      "supportingIntents": [
+        "birthday cakes Somerset West",
+        "custom cake baker Somerset West",
+        "Brie Cakes",
+        "Polite Ndoro cakes"
+      ],
+      "purpose": "Business identity, services, gallery, ordering steps, service areas, hours, and contact"
+    },
+    {
+      "path": "/birthday-cakes-somerset-west",
+      "primaryIntent": "birthday cakes Somerset West",
+      "supportingIntents": [
+        "custom birthday cake Somerset West",
+        "order birthday cake Somerset West",
+        "birthday cake quote"
+      ],
+      "purpose": "Birthday cake brief, notice, servings, inspiration, and starting prices"
+    },
+    {
+      "path": "/kids-themed-cakes-somerset-west",
+      "primaryIntent": "kids themed cakes Somerset West",
+      "supportingIntents": [
+        "kids birthday cakes Somerset West",
+        "themed birthday cake",
+        "character inspired cake"
+      ],
+      "purpose": "Theme briefing, design priorities, age details, budget, and notice"
+    },
+    {
+      "path": "/cake-prices-somerset-west",
+      "primaryIntent": "cake prices Somerset West",
+      "supportingIntents": [
+        "custom cake prices",
+        "birthday cake starting prices",
+        "Brie Cakes price guide"
+      ],
+      "purpose": "Published starting prices, quote factors, budget choices, and deposits"
+    },
+    {
+      "path": "/cake-delivery-collection-helderberg",
+      "primaryIntent": "cake delivery and collection Helderberg",
+      "supportingIntents": [
+        "cake collection Somerset West",
+        "cake delivery Somerset West",
+        "transport and store a cake"
+      ],
+      "purpose": "Collection, selected-area delivery, transport, handover, and storage"
+    },
+    {
+      "path": "/bento-cakes-cupcakes-somerset-west",
+      "primaryIntent": "bento cakes and cupcakes Somerset West",
+      "supportingIntents": [
+        "bento cake Somerset West",
+        "cake and cupcake combo",
+        "small birthday cake"
+      ],
+      "purpose": "Small-format options, R350 starting price, brief, notice, and collection"
+    }
+  ]
+}

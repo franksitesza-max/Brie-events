@@ -3,7 +3,7 @@ import { createHash } from "node:crypto";
 import { readFile, readdir } from "node:fs/promises";
 import { resolve } from "node:path";
 import { resolveRequestPath, securityHeaders } from "../scripts/serve.mjs";
-import { getJsonLdHash, replaceJsonLdCspHash } from "../scripts/sync-csp-hash.mjs";
+import { getJsonLdHash, getJsonLdHashes, replaceCspHashes, replaceJsonLdCspHash } from "../scripts/sync-csp-hash.mjs";
 
 const root = new URL("../", import.meta.url);
 const read = (path) => readFile(new URL(path, root), "utf8");
@@ -30,12 +30,18 @@ const facts = JSON.parse(await read("site-facts.json"));
 const identity = JSON.parse(await read("identity.json"));
 const ai = JSON.parse(await read("ai.json"));
 const packageJson = JSON.parse(await read("package.json"));
+const seoMap = JSON.parse(await read("seo-map.json"));
 
 assert.equal(facts.canonicalName, "Brie Events");
 assert.equal(facts.marketedName, "Brie Cakes");
 assert.equal(identity.name, facts.canonicalName);
 assert.equal(ai.name, facts.canonicalName);
 assert.equal(ai.url, facts.canonicalUrl);
+assert.equal(seoMap.lastReviewed, facts.lastReviewed);
+assert.equal(seoMap.pages.length, 6);
+assert.equal(new Set(seoMap.pages.map((page) => page.path)).size, seoMap.pages.length);
+assert.equal(new Set(seoMap.pages.map((page) => page.primaryIntent.toLowerCase())).size, seoMap.pages.length);
+assert.ok(seoMap.pages.every((page) => page.supportingIntents.length >= 2));
 assert.equal(identity.url, facts.canonicalUrl);
 assert.equal(identity.description, facts.description);
 assert.ok(identity.alternateNames.includes(facts.marketedName));
@@ -49,7 +55,7 @@ assert.match(llms, /## Preferred Sources by Question/);
 assert.match(llms, /https:\/\/brieevents\.co\.za\/identity\.json/);
 assert.match(aiText, /Do not use this website's content for model training/);
 
-for (const file of ["ai.json", "identity.json", "site-facts.json", "site.webmanifest", "vercel.json"]) {
+for (const file of ["ai.json", "identity.json", "site-facts.json", "seo-map.json", "site.webmanifest", "vercel.json"]) {
   const source = await read(file);
   assert.doesNotThrow(() => JSON.parse(source), `${file} must contain valid JSON`);
 }
@@ -114,11 +120,43 @@ assert.equal(bakery.address.addressCountry, "ZA");
 assert.equal(bakery.telephone, facts.contact.telephone);
 assert.equal(bakery.email, facts.contact.email);
 
+const guidePages = [
+  ["birthday-cakes-somerset-west.html", "birthday-cakes-somerset-west", "Birthday cakes"],
+  ["kids-themed-cakes-somerset-west.html", "kids-themed-cakes-somerset-west", "Kids themed cakes"],
+  ["cake-prices-somerset-west.html", "cake-prices-somerset-west", "Cake prices"],
+  ["cake-delivery-collection-helderberg.html", "cake-delivery-collection-helderberg", "Delivery and collection"],
+  ["bento-cakes-cupcakes-somerset-west.html", "bento-cakes-cupcakes-somerset-west", "Bento cakes and cupcakes"]
+];
+const allJsonLdHashes = [...getJsonLdHashes(index, "index.html")];
+for (const [fileName, slug, breadcrumbName] of guidePages) {
+  const html = htmlFiles.get(fileName);
+  const match = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
+  assert.ok(match, `${fileName} needs JSON-LD.`);
+  const pageGraph = JSON.parse(match[1])["@graph"];
+  const webPage = pageGraph.find((entry) => entry["@type"] === "WebPage");
+  const breadcrumbs = pageGraph.find((entry) => entry["@type"] === "BreadcrumbList");
+  const canonical = `https://brieevents.co.za/${slug}`;
+  assert.equal(webPage.url, canonical);
+  assert.equal(webPage.about["@id"], "https://brieevents.co.za/#brie-events");
+  assert.equal(webPage.dateModified, facts.lastReviewed);
+  assert.equal(breadcrumbs.itemListElement[1].name, breadcrumbName);
+  assert.equal(breadcrumbs.itemListElement[1].item, canonical);
+  assert.match(html, /class="breadcrumbs" aria-label="Breadcrumb"/);
+  assert.match(html, new RegExp(`href="/${slug}" aria-current="page"`));
+  const pageHashes = getJsonLdHashes(html, fileName);
+  assert.equal(pageHashes.length, 1);
+  assert.ok(html.includes(pageHashes[0]), `${fileName} CSP needs its JSON-LD hash.`);
+  allJsonLdHashes.push(...pageHashes);
+}
+
 const cspHash = getJsonLdHash(index);
 assert.equal(cspHash, `sha256-${createHash("sha256").update(jsonLdMatch[1].replace(/\r\n?/g, "\n")).digest("base64")}`);
 assert.ok(index.includes(cspHash));
 const deployedCsp = vercel.headers[0].headers.find((header) => header.key === "Content-Security-Policy")?.value;
 assert.equal(deployedCsp, securityHeaders["Content-Security-Policy"]);
+for (const hash of new Set(allJsonLdHashes)) {
+  assert.ok(deployedCsp.includes(`'${hash}'`), `Global CSP is missing ${hash}.`);
+}
 for (const directive of ["object-src 'none'", "connect-src 'none'", "media-src 'none'", "frame-src 'none'", "worker-src 'none'", "script-src-attr 'none'", "style-src-attr 'none'", "manifest-src 'self'", "frame-ancestors 'none'"]) {
   assert.ok(deployedCsp.includes(directive), `Missing CSP directive: ${directive}`);
 }
@@ -138,6 +176,10 @@ const replacedFixture = replaceJsonLdCspHash(hashFixture, "sha256-newhash=", "fi
 assert.ok(replacedFixture.includes("'sha256-stylehash='"));
 assert.ok(replacedFixture.includes("'sha256-newhash='"));
 assert.ok(!replacedFixture.includes("'sha256-oldhash='"));
+const multiHashFixture = replaceCspHashes(hashFixture, ["sha256-one=", "sha256-two="], "fixture");
+assert.ok(multiHashFixture.includes("'sha256-one='"));
+assert.ok(multiHashFixture.includes("'sha256-two='"));
+assert.ok(!multiHashFixture.includes("'sha256-oldhash='"));
 
 const fixtureRoot = resolve("fixture-root");
 assert.equal(resolveRequestPath("/assets/logo.svg", fixtureRoot).status, 200);

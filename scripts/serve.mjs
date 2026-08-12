@@ -26,7 +26,7 @@ const mimeTypes = new Map([
 
 export const securityHeaders = {
   "Content-Security-Policy":
-    "default-src 'self'; img-src 'self' data:; style-src 'self' https://fonts.googleapis.com; style-src-attr 'none'; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'sha256-8kchyQBPEpdg5RTriWOoi3QVqY4KKzktPXiqg+jSDXU='; script-src-attr 'none'; connect-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests",
+    "default-src 'self'; img-src 'self' data:; style-src 'self' https://fonts.googleapis.com; style-src-attr 'none'; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'sha256-8kchyQBPEpdg5RTriWOoi3QVqY4KKzktPXiqg+jSDXU=' 'sha256-ag8QhAbX49PeCguplze/f1U6K3ZFZJ/bhbBwcBUg65I=' 'sha256-RMIR1tUWV0HgVeKwxBnCr/Fzgj12uL/U8GRe3V/rPMY=' 'sha256-tBhuDkR4IwTXjRTuLz+ZirWyoQAaJhFt/WoKcbpKx+g=' 'sha256-pzi2/t0nMhPYDnr5xdLVOmmzINMrSdWjkMF24lFQkvk=' 'sha256-cX4DxyB2VDmZV5be159jLWdYYgXsYxzymVf7v8RuBs8='; script-src-attr 'none'; connect-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests",
   "X-Content-Type-Options": "nosniff",
   "X-Frame-Options": "DENY",
   "Referrer-Policy": "strict-origin-when-cross-origin",
