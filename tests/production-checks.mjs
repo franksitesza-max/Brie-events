@@ -99,6 +99,26 @@ assert.ok(index.includes('href="#pricing-content"'));
 assert.ok(index.includes('href="#gallery-title"'));
 assert.ok(index.includes('href="#contact-title"'));
 assert.doesNotMatch(index, /hero-stamp|Made to order/, "Removed hero badge must stay removed.");
+const whatsappTemplates = {
+  "index.html": ["custom cake quote", "Cake type and servings", "Budget"],
+  "birthday-cakes-somerset-west.html": ["custom birthday cake quote", "Birthday person's age", "Guest count"],
+  "kids-themed-cakes-somerset-west.html": ["kids themed birthday cake quote", "Child's age", "character inspiration"],
+  "cake-prices-somerset-west.html": ["price guide", "Cake format I am considering", "what you recommend"],
+  "cake-delivery-collection-helderberg.html": ["collection or delivery", "Preferred handover time", "delivery fee"],
+  "bento-cakes-cupcakes-somerset-west.html": ["bento cake and cupcakes quote", "Cupcake quantity", "Bento cake flavour"],
+  "404.html": ["custom cake enquiry", "Guest count", "Collection or delivery area"]
+};
+for (const [fileName, phrases] of Object.entries(whatsappTemplates)) {
+  const html = htmlFiles.get(fileName);
+  const whatsappLinks = [...html.matchAll(/href="(https:\/\/wa\.me\/27685533304\?text=[^"]+)"/g)];
+  assert.ok(whatsappLinks.length > 0, `${fileName} needs a WhatsApp quote link.`);
+  for (const link of whatsappLinks) {
+    const message = decodeURIComponent(new URL(link[1]).searchParams.get("text"));
+    for (const phrase of phrases) {
+      assert.match(message, new RegExp(phrase, "i"), `${fileName} WhatsApp template is missing ${phrase}.`);
+    }
+  }
+}
 for (const phrase of [
   "Birthday cakes made for your people",
   "A custom quote for every cake brief",
