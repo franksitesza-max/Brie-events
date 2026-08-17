@@ -2777,6 +2777,13 @@ p {
 }
 
 @media (max-width: 680px) {
+  /* Keep the loading glass pane with the stacked copy, never over the cake. */
+  html.is-loading #home[data-load-component]::before {
+    top: 1rem;
+    height: clamp(25rem, 112vw, 31rem);
+    transform: translateX(-50%);
+  }
+
   .hero-grid {
     display: block;
     min-height: 43rem;
