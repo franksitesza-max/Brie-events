@@ -2784,37 +2784,21 @@ p {
     transform: translateX(-50%);
   }
 
-  .hero-grid {
-    display: block;
-    min-height: 43rem;
-  }
-
-  .hero-copy {
-    position: relative;
-    z-index: 2;
-  }
-
   .hero-visual {
-    position: absolute;
-    z-index: 1;
-    top: 1.75rem;
-    right: -5.5rem;
-    width: min(84vw, 24rem);
-    margin: 0;
+    width: min(100%, 27rem);
+    margin-top: -0.5rem;
     padding: 0;
-    pointer-events: none;
-  }
-
-  .hero-cake-card {
-    opacity: 1;
-  }
-
-  .hero-cake-card img {
-    filter: drop-shadow(0 20px 26px rgba(71, 44, 43, 0.18));
   }
 
   .hero-cake-card figcaption {
-    display: none;
+    position: relative;
+    right: auto;
+    bottom: auto;
+    left: auto;
+    width: max-content;
+    max-width: 92%;
+    margin: -0.35rem auto 0;
+    text-align: center;
   }
 
   .media-note {
